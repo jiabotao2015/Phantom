@@ -4,4 +4,14 @@
   <artifactId>Phantom</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <properties>
+  	<Encoding>UTF-8</Encoding>
+  	<java_source_version>1.8</java_source_version>
+	<java_target_version>1.8</java_target_version>
+	<maven.test.skip>true</maven.test.skip>
+	<maven.jdoc.skip>true</maven.jdoc.skip>
+	<downloadSources>true</downloadSources>
+  </properties>
+  <build>
+  </build>
 </project>
