@@ -1,17 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>Phantom</groupId>
-  <artifactId>Phantom</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <properties>
-  	<Encoding>UTF-8</Encoding>
-  	<java_source_version>1.8</java_source_version>
-	<java_target_version>1.8</java_target_version>
-	<maven.test.skip>true</maven.test.skip>
-	<maven.jdoc.skip>true</maven.jdoc.skip>
-	<downloadSources>true</downloadSources>
-  </properties>
-  <build>
-  </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Phantom</groupId>
+	<artifactId>Phantom</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<Encoding>UTF-8</Encoding>
+		<java_source_version>1.8</java_source_version>
+		<java_target_version>1.8</java_target_version>
+		<maven.test.skip>true</maven.test.skip>
+		<maven.jdoc.skip>true</maven.jdoc.skip>
+		<downloadSources>true</downloadSources>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<source>${java_source_version}</source>
+					<target>${java_target_version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
