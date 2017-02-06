@@ -27,4 +27,10 @@
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>Phantom-API</module>
+		<module>Phantom-Common</module>
+		<module>Phantom-TerminalAccess</module>
+		<module>Phantom-Protocol</module>
+	</modules>
 </project>
