@@ -32,5 +32,6 @@
 		<module>Phantom-Common</module>
 		<module>Phantom-TerminalAccess</module>
 		<module>Phantom-Protocol</module>
+		<module>Phantom-Web</module>
 	</modules>
 </project>
