@@ -18,7 +18,7 @@ public class XmlElement implements Serializable{
 	
 	private ArrayList<XmlElement> content;  //xml父节点包含的所有内容
 	
-	private HashMap<String,ArrayList<XmlElement>> children;
+	private HashMap<String,ArrayList<XmlElement>> children; //子节点，同名子节点放入一个List
 	
 	public XmlElement(String name) {
 		this.name = name;
