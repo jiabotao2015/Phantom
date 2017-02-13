@@ -8,6 +8,6 @@
 </head>
 <body>
 Index Page
-<a href="admin/blogs/add" type="button" >详情</a>
+<a href="Login" type="button" >详情</a>
 </body>
 </html>

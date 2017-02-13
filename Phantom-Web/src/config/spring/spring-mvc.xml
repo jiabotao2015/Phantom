@@ -12,9 +12,8 @@
 	   				
 	<!--指明 controller 所在包，并扫描其中的注解-->	   
 	<context:component-scan base-package="Phantom.Web.Controller"/>
-	<!-- 静态资源(js、image等)的访问 -->
-	<mvc:default-servlet-handler/>
 	
+	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/"/>  
 	<!-- 开启注解 -->
 	<mvc:annotation-driven/>
 	   					   
