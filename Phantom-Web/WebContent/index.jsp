@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Index Page</title>
 </head>
 <body>
 Index Page
-<a href="../admin/blogs/add" type="button" >详情</a>
+<a href="admin/blogs/add" type="button" >详情</a>
 </body>
 </html>
