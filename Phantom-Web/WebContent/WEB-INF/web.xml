@@ -3,16 +3,42 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	
+
 	<display-name>PhantomWeb</display-name>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
-	 
 
-	<!-- 配置SpringMVC -->
+	<!-- 用于配置数据源 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/spring/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- log4j配置开始 -->
+	<context-param>  
+        <param-name>webAppRootKey</param-name>  
+        <param-value>PhantomWeb.root</param-value>  
+    </context-param>
+    <context-param>  
+        <param-name>log4jConfigLocation</param-name>  
+        <param-value>classpath:config/log4j/log4j.properties</param-value>  
+    </context-param>  
+    <context-param>  
+        <param-name>log4jRefreshInterval</param-name>  
+        <param-value>3000</param-value>  
+    </context-param>  
+	<listener>  
+        <listener-class>  
+            org.springframework.web.util.Log4jConfigListener  
+        </listener-class>  
+    </listener>
+    <!-- log4j配置结束 -->  
+
+	<!-- 用于配置MVC框架 -->
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -22,7 +48,6 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
