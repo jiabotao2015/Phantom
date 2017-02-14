@@ -13,7 +13,8 @@
 	<!--指明 controller 所在包，并扫描其中的注解-->	   
 	<context:component-scan base-package="Phantom.Web.Controller"/>
 	
-	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/"/>  
+	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/"/>
+	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/"/>  
 	<!-- 开启注解 -->
 	<mvc:annotation-driven/>
 	   					   
