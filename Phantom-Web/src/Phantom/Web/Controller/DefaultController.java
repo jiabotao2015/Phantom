@@ -10,5 +10,10 @@ public class DefaultController {
 	public String Login(){
 		return "Login";
 	}
+	
+	@RequestMapping(value = "/VehicleMonitor/Map")
+	public String Map(){
+		return "VehicleMonitor/Map";
+	}
 
 }

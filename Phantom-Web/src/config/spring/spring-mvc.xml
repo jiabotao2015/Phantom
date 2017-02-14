@@ -14,7 +14,9 @@
 	<context:component-scan base-package="Phantom.Web.Controller"/>
 	
 	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/"/>
-	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/"/>  
+	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/"/>
+	<mvc:resources mapping="/Icons/**" location="/Resources/Icons/"/>
+	
 	<!-- 开启注解 -->
 	<mvc:annotation-driven/>
 	   					   
