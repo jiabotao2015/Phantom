@@ -16,5 +16,7 @@
 	<button type="button" class="btn btn-success">（成功）Success</button>
 	<button type="button" class="btn btn-info">（一般信息）Info</button>
 	<button type="button" class="btn btn-danger">（危险）Danger</button>
+	<a class="btn btn-success" href="Login" type="button" >Login</a>
+	<a class="btn btn-primary" href="VehicleMonitor/Map" type="button" >Map</a>
 </body>
 </html>
