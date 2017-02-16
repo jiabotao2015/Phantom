@@ -13,7 +13,7 @@
 <body>
 	<button type="button" class="btn btn-default">（默认样式）Default</button>
 	<button type="button" id='Login_VehicleInfo' class="btn btn-primary">AJAX</button>
-	<button type="button" class="btn btn-success">（成功）Success</button>
+	<button type="button" id='Map_VehicleInfo'   class="btn btn-success">（成功）Success</button>
 	<button type="button" class="btn btn-info">（一般信息）Info</button>
 	<button type="button" class="btn btn-danger">（危险）Danger</button>
 </body>

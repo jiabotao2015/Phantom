@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
 	$("#Login_VehicleInfo").click(function() {
-		var info = 'Message From Login.jsp';
+		var info = 'Message From Login.jsp中文测试！@#￥!@#$';
 		$.ajax({
 			type : 'POST',
 			url : 'VehicleMonitor/VehicleInfo',
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 	});
 	$("#Map_VehicleInfo").click(function() {
-		var info = 'Message From Map.jsp';
+		var info = 'Message From Map.jsp中文测试！@#￥!@#$';
 		$.ajax({
 			type : 'POST',
 			url : '../VehicleMonitor/VehicleInfo',
