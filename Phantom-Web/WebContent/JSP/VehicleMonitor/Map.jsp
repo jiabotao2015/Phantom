@@ -7,6 +7,7 @@
 <title>Map</title>
 <script src="../jQuery/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../BootStrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../Resources/BootStrap/css/bootstrap.min.css" />
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </head>
 <body>

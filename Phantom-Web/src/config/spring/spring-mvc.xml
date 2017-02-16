@@ -17,6 +17,7 @@
 	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/"/>
 	<mvc:resources mapping="/Icons/**" location="/Resources/Icons/"/>
 	<mvc:resources mapping="/AppJS/**" location="/AppJS/"/>
+	<mvc:resources mapping="/AppCSS/**" location="/AppCSS/"/>
 	
 	<!-- 开启注解 -->
 	<mvc:annotation-driven/>
