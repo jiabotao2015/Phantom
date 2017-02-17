@@ -20,13 +20,21 @@
 	<mvc:resources mapping="/AppCSS/**" location="/AppCSS/"/>
 	
 	<!-- 开启注解 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	   					   
-	<!-- 定义视图解析器 -->    
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
-		<property name="prefix" value="/JSP/"></property>  
-		<property name="suffix" value=".jsp"></property>  
-	</bean>   
-	  
+	<!-- 定义视图解析器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/JSP/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+ 
 </beans>
