@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class VehicleInfoController {
 	
-	@RequestMapping(value = "/VehicleMonitor/VehicleInfo")
+	@RequestMapping(value = "/VehicleMonitor/VehicleInfo",produces="text/plain;charset=UTF-8")
 	public @ResponseBody String VehicleInfo(String Message){
 		System.out.println(Message);
 		return "VehicleInfo_Action中文测试！@#￥1234!@#$";

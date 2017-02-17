@@ -51,9 +51,5 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.google.code.kaptcha</groupId>
-			<artifactId>kaptcha</artifactId>
-		</dependency>
 	</dependencies>
 </project>
