@@ -11,7 +11,6 @@ import Phantom.API.Bean.User;
 
 @Controller
 public class DefaultController {
-	
 	@RequestMapping(value = "/Login")
 	public String Login(){
 		return "Login";
