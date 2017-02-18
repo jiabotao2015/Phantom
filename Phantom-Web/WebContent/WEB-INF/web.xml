@@ -72,7 +72,7 @@
 	</filter-mapping>
 	<filter>  
     	<filter-name>AuthFilter</filter-name>  
-    	<filter-class>Phantom.Web.Filter.TestAuthFilter</filter-class>  
+    	<filter-class>Phantom.Web.Filter.AuthFilter</filter-class>  
 	</filter>  
 	<filter-mapping>  
     	<filter-name>AuthFilter</filter-name>  

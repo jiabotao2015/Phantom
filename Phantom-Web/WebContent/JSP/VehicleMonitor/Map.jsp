@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="../Icons/favicon.ico"/>
 <title>Map</title>
 <script src="../jQuery/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../BootStrap/css/bootstrap.min.css" />
