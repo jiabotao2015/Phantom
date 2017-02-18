@@ -8,6 +8,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class AuthFilter implements Filter {
 	
@@ -20,15 +23,42 @@ public class AuthFilter implements Filter {
 
 	}
 
+	/**
+	 * doFilter 应该放过css  js  jpg 等静态资源  以及 websocket
+	 */
 	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
+
+        HttpServletRequest req = (HttpServletRequest)request;  
+        HttpServletResponse res = (HttpServletResponse)response;  
+        //基于http协议的servlet  
+          
+        //如果没有登录.  
+        String requestURI = req.getRequestURI().substring(req.getRequestURI().indexOf("/",1),req.getRequestURI().length());  
+      
+        //如果第一次请求不为登录页面,则进行检查用session内容,如果为登录页面就不去检查.  
+        if(!"/LoginAction".equals(requestURI) &&!"/Login".equals(requestURI) && !"/servlet/AuthImageServlet".equals(requestURI) && !requestURI.contains("."))  
+        {  
+            //取得session. 如果没有session则自动会创建一个, 我们用false表示没有取得到session则设置为session为空.  
+            HttpSession session = req.getSession(false);  
+            //如果session中没有任何东西.  
+            if(session == null ||session.getAttribute("user_info")==null)  
+            {  
+                res.sendRedirect(req.getContextPath() + "/Login");  
+                //返回  
+                return;  
+            }  
+              
+        }  
+        //session中的内容等于登录页面, 则可以继续访问其他区资源.  
+        chain.doFilter(req, res); 
 
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 
 	}

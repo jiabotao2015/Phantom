@@ -52,8 +52,13 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>Phantom-API</groupId>
+			<artifactId>Phantom-API</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency>
 			<groupId>com.google.code.kaptcha</groupId>
 			<artifactId>kaptcha</artifactId>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>
