@@ -19,6 +19,7 @@ public class DefaultController {
 	@RequestMapping(value = "/LoginAction")
 	public ModelAndView LoginAction(String Email, String password, HttpServletRequest request){
 		HttpSession session = request.getSession();
+		System.out.println(request.getCharacterEncoding());
 		User user = new User();		
 		if(Email.equals("jiabotao@gmail.com")&&password.equals("jiabotao")){
 			user.setUserId(1);
@@ -26,6 +27,7 @@ public class DefaultController {
 			user.setPassWord(password);
 			session.setAttribute("user",user);
 			return new ModelAndView("redirect:/Home");
+			
 		}
 		return new ModelAndView("redirect:/Login");
 	}

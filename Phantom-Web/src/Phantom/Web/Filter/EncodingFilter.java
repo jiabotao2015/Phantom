@@ -8,6 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class EncodingFilter implements Filter{
 
@@ -19,8 +21,12 @@ public class EncodingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");  
-        response.setCharacterEncoding("UTF-8");  
+		request.setCharacterEncoding("GB2312");  
+        response.setCharacterEncoding("GB2312");  
+        HttpServletRequest req = (HttpServletRequest)request;  
+        HttpServletResponse res = (HttpServletResponse)response;
+        req.setCharacterEncoding("UTF-8");
+        res.setCharacterEncoding("UTF-8");
         chain.doFilter(request, response); 
 		
 	}
