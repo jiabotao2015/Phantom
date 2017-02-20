@@ -56,11 +56,15 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.google.code.kaptcha</groupId>
+			<artifactId>kaptcha</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>  
-			<groupId>redis.clients</groupId>  
+			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId> 
 		</dependency>
 		<dependency>
@@ -68,7 +72,5 @@
 			<artifactId>Phantom-API</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.google.code.kaptcha</groupId> <artifactId>kaptcha</artifactId> 
-			</dependency> -->
 	</dependencies>
 </project>

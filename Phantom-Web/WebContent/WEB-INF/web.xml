@@ -13,7 +13,10 @@
 	<!-- 用于配置数据源 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/spring/applicationContext.xml</param-value>
+		<param-value>
+			classpath:config/spring/applicationContext.xml,
+			classpath:config/spring/Spring-Common-Context.xml
+		</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
