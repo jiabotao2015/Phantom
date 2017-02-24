@@ -1,6 +1,6 @@
 /**   
 * @Project: Phantom-Web
-* @Title: 
+* @Title: 单点登录Listener
 * @Package Phantom.Web.Filter
 * @Files: LoginSessionListener.java
 * @Description: 监听session变化，实现单点登录，后登陆的用户挤掉前登陆的人
@@ -10,8 +10,8 @@
 */
 package Phantom.Web.Filter;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
@@ -21,7 +21,7 @@ import Phantom.API.Bean.User;
 
 public class LoginSessionListener implements HttpSessionAttributeListener {
 
-	private Map<String, HttpSession> map = new HashMap<String, HttpSession>();
+	private Map<String, HttpSession> map = new ConcurrentHashMap<String, HttpSession>();
 
 	/*
 	 * (non-Javadoc)
@@ -32,9 +32,7 @@ public class LoginSessionListener implements HttpSessionAttributeListener {
 	 */
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		// TODO Auto-generated method stub
 		String name = event.getName();
-
 		if (name.equals("user")) {
 			User user = (User) event.getValue();
 			if (map.get(user.getUserName()) != null) {
@@ -52,7 +50,8 @@ public class LoginSessionListener implements HttpSessionAttributeListener {
 	 * 
 	 * @see
 	 * javax.servlet.http.HttpSessionAttributeListener#attributeRemoved(javax.
-	 * servlet.http.HttpSessionBindingEvent) 当向session中移除数据触发
+	 * servlet.http.HttpSessionBindingEvent) 
+	 * 当向session中移除数据触发
 	 */
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent event) {
