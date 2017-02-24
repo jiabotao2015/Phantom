@@ -22,7 +22,7 @@ public class AuthFilter implements Filter {
 	}
 
 	/**
-	 * doFilter 应该放过css  js  jpg 等静态资源  以及 websocket
+	 * doFilter 应该放过css  js  jpg 等静态资源  以及 websocket  webservice
 	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -38,6 +38,7 @@ public class AuthFilter implements Filter {
 			//取session
 			Object obj = req.getSession().getAttribute("user");
 			if(obj==null){
+				System.out.println("空session访问，请先登录");
 				res.sendRedirect(req.getContextPath() + "/Login");
 			}else{
 				chain.doFilter(req, res); 
