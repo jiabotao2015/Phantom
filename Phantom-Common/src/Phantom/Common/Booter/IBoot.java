@@ -1,10 +1,10 @@
 package Phantom.Common.Booter;
 
-public abstract class IBoot extends BootTools{
+public interface IBoot{
 	
-	protected abstract boolean init();
+	boolean init();
 	
-	protected abstract boolean start();
+	boolean start();
 	
-	protected abstract boolean stop();
+	boolean stop();
 }
