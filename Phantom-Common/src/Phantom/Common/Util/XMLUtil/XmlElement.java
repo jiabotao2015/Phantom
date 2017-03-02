@@ -84,4 +84,18 @@ public class XmlElement implements Serializable{
 		return child;
 	}
 	
+	/**
+	 * 设置/添加子节点
+	 * @param child
+	 */
+	public void setChildElement(XmlElement child){
+		String childName = child.getName();
+		ArrayList<XmlElement> namedChildren = children.get(childName);
+		if(namedChildren == null){
+			namedChildren = new ArrayList<XmlElement>();
+		}
+		namedChildren.add(child);
+		content.add(child);
+	}
+	
 }
