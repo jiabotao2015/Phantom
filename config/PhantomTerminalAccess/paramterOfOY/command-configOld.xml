@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server todo="报警参数对照说明">
+
+	<paramter name="1,533,552" identify="C1" description="单次点名指令,油量查询,里程查询"/>
+	<paramter name="551" identify="C2" description="报警确认清除指令"/>
+	<paramter name="339" identify="C3" description="服务器链路广播指令"/>
+	<paramter name="92" identify="C4" description="GPRS通道短消息发送指令"/>
+	<paramter name="89" identify="C5" description="读终端参数指令"/>
+	<paramter name="542" identify="C6" description="读取行车记录仪记录数据指令"/>
+	<paramter name="1227" identify="C7" description="读道路块数据指令"/>
+	<paramter name="524" identify="C8" description="监听指令"/>
+	<paramter name="1229" identify="C9" description="条件呼叫指令"/>
+	<paramter name="1230" identify="C10" description="查询升级程序块号指令"/>
+	<paramter name="1231" identify="C11" description="下发解封密码指令"/>
+	<paramter name="1232" identify="C12" description="主机程序升级通知指令"/>
+	
+	<paramter name="3431" identify="C13" description="主机升级代码数据下载指令"/>
+	<paramter name="12226" identify="C14" description="主机升级代码结束下载指令"/>
+	<paramter name="12237" identify="C15" description="汉显程序升级通知指令"/>
+	<paramter name="1204" identify="C16" description="汉显升级代码数据下载指令"/>
+	<paramter name="12529" identify="C17" description="汉显升级代码结束下载指令"/>
+	<paramter name="12330" identify="C18" description="查询摄像模块指令"/>
+	<paramter name="546" identify="C19" description="即时拍摄指令"/>
+	<paramter name="14232" identify="C20" description="读取图片数据指令"/>
+	<paramter name="2533" identify="C21" description="读取油耗监测仪记录数据指令"/>
+	
+	<paramter name="2,531,532" identify="S1" description="定时回报,定距回报,定时定距回报,定位监控消息以及历史记录间隔设置指令"/>
+	<paramter name="332" identify="S2" description="设置监控中心短消息号码指令"/>
+	<paramter name="58" identify="S3" description="设置服务电话号码指令"/>
+	<paramter name="9" identify="S4" description="设置监控中心IP端口连接模式"/>
+	<paramter name="73,74,530" identify="S5" description="超速报警速度设置,超速报警持续时间设置,取消报警设置,限速设置指令"/>
+	<paramter name="550,109" identify="S6" description="设置矩形电子围栏指令,删除围栏指令"/>
+	<paramter name="528" identify="S7" description="疲劳驾驶参数设置指令"/>
+	<paramter name="13637" identify="S8" description="设置道路数据指令"/>
+	<paramter name="13177" identify="S9" description="设置道路参数指令"/>
+	<paramter name="536" identify="S10" description="里程清零指令"/>
+	<!--以下命令字未对接-->
+	<paramter name="11337" identify="S11" description="设置四路输出指令"/>
+	<paramter name="20" identify="S12" description="终端重启指令"/>
+	<paramter name="94" identify="S13" description="恢复出厂设置指令"/>
+	<paramter name="13437" identify="S14" description="设置固定短消息指令"/>
+	<paramter name="13237" identify="S15" description="设置省电模式指令"/>
+	<paramter name="13337" identify="S16" description="系统设置指令"/>
+	<paramter name="13227" identify="S17" description="通话设置指令"/>
+	<paramter name="13317" identify="S18" description="分组指令"/>
+</server>

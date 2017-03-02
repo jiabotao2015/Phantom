@@ -7,4 +7,11 @@
   </parent>
   <groupId>Phantom-TerminalAccess</groupId>
   <artifactId>Phantom-TerminalAccess</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>Phantom-Common</groupId>
+  		<artifactId>Phantom-Common</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

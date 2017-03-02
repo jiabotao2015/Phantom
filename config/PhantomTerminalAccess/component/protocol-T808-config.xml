@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocolComponent threadConfig="ListenerThreadsPool,MYFiX,50,50,200000,30000">
+	
+	<!-- T808协议接入 -->
+	<listener type="0" delay="0" period="0" value="t808_receive" taskCount="40" adaptername="cn.com.cnpc.vms.protocols.tcp.T808.adapter.ReceiveT808ProtocolAdapter"/>
+		
+	<!-- T808协议指令 -->
+	<listener type="0" delay="0" period="0" value="t808_command" taskCount="4" adaptername="cn.com.cnpc.vms.protocols.tcp.T808.adapter.CommandT808ProtocolAdapter"/>
+		
+	<properties>
+		<prop key="hostIP" value="10.185.162.80"/>
+		<prop key="username" value="coh"/>
+		<prop key="password" value="coh"/>
+		<prop key="directoryPath" value="/vmsData/tmp/"/>
+		<prop key="judgeTerminal_ID" value="1" />
+		<prop key="judgeAUTH_CODE" value="1" />
+	</properties>
+	
+</protocolComponent>

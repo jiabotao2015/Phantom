@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messagecomponent threadConfig="KafkaMessageComponent_Pool,MYFiX,11,20,200000,30000">
+
+	<!-- 生产者服务配置 -->
+	<producer metadata.broker.list="10.185.162.180:9092,10.185.162.181:9092,10.185.162.182:9092">
+		<!-- 生产者 -->
+		<!-- 终端原始数据 -->
+		<sender taskCount="4" messageconnectname="grizzly_data">
+			<topic name="gpsraw" partitioner.class="kafka.producer.DefaultPartitioner" serializer.class="kafka.serializer.StringEncoder" request.required.acks="1" client.id="" producer.type="async" batch.num.messages="200"/>
+		</sender>
+		<!-- 服务错误记录 -->
+		<sender taskCount="1" messageconnectname="error_data">
+			<topic name="serviceerror" partitioner.class="kafka.producer.DefaultPartitioner" serializer.class="kafka.serializer.StringEncoder" request.required.acks="1" client.id="" producer.type="sync" batch.num.messages="200"/>
+		</sender>
+		<!-- 服务信息记录 -->
+		<sender taskCount="1" messageconnectname="info_data">
+			<topic name="serviceinfo" partitioner.class="kafka.producer.DefaultPartitioner" serializer.class="kafka.serializer.StringEncoder" request.required.acks="1" client.id="" producer.type="sync" batch.num.messages="200"/>
+		</sender>
+		<!-- 服务警告记录 -->
+		<sender taskCount="1" messageconnectname="warn_data">
+			<topic name="servicewarn" partitioner.class="kafka.producer.DefaultPartitioner" serializer.class="kafka.serializer.StringEncoder" request.required.acks="1" client.id="" producer.type="sync" batch.num.messages="200"/>
+		</sender>
+		<!-- 服务跟踪数据 -->
+		<sender taskCount="4" messageconnectname="trace_data">
+			<topic name="servicetrace1" partitioner.class="kafka.producer.DefaultPartitioner" serializer.class="kafka.serializer.StringEncoder" request.required.acks="1" client.id="" producer.type="sync" batch.num.messages="200"/>
+		</sender>
+	</producer>
+
+</messagecomponent>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TcpReceiverCompoent threadConfig="TCPRECEIVE_Pool,MYFiX,1,10,200000,30000" sendToMC="chooser_receive" receiveResponseMC="receive_response" respnoseTaskCount="1">
+    <Ipconfig hostip="10.185.162.121" port="6015"/>
+    <caseconfig commandMessageConnectCache="_command_cache">
+			<case name="T808" sendMessageConnect="t808_receive" commandMessageConnect="t808_command" casename="cn.com.cnpc.vms.protocols.tcp.T808.choose.T808Case"/>
+			<case name="HUAQ" sendMessageConnect="huaq_receive" commandMessageConnect="huaq_command" casename="cn.com.cnpc.vms.protocols.tcp.HQ.choose.HUAQCase"/>
+			<case name="TIANQ" sendMessageConnect="tianq_receive" commandMessageConnect="tianq_command" casename="cn.com.cnpc.vms.protocols.tcp.TQ.choose.TIANQCase"/>
+			<case name="ET08" sendMessageConnect="et08_receive" commandMessageConnect="et08_command" casename="cn.com.cnpc.vms.protocols.tcp.ET08.choose.ET08Case"/>
+	<case name="OY" sendMessageConnect="oy_receive" commandMessageConnect="oy_command" casename="cn.com.cnpc.vms.protocols.tcp.oy.chosecase.OYCase"/>
+	</caseconfig>
+</TcpReceiverCompoent>

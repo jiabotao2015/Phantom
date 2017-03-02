@@ -3,6 +3,7 @@ package Phantom.Common.Util.XMLUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 /**
  * 
  * @author jiabotao
@@ -14,11 +15,11 @@ public class XmlElement implements Serializable{
 	
 	private String name;  //xml（父）节点名称
 	
-	private HashMap<String,String> attributes;  //xml(父)节点属性键值对
+	private HashMap<String,String> attributes = new HashMap<String,String>();  //xml(父)节点属性键值对
 	
-	private ArrayList<XmlElement> content;  //xml父节点包含的所有内容
+	private ArrayList<XmlElement> content= new ArrayList<XmlElement>();  //xml父节点包含的所有内容
 	
-	private HashMap<String,ArrayList<XmlElement>> children; //子节点，同名子节点放入一个List
+	private HashMap<String,ArrayList<XmlElement>> children = new HashMap<String,ArrayList<XmlElement>>(); //子节点，同名子节点放入一个List
 	
 	public XmlElement(String name) {
 		this.name = name;
@@ -84,13 +85,22 @@ public class XmlElement implements Serializable{
 		return child;
 	}
 	
+	public List<XmlElement> getChildElements(String childName) {
+		List<XmlElement> childElements = children.get(childName);
+		if (childElements == null) {
+			childElements = new ArrayList<XmlElement>(0);
+		}
+		return childElements;
+	}
+	
 	/**
 	 * 设置/添加子节点
 	 * @param child
 	 */
 	public void setChildElement(XmlElement child){
 		String childName = child.getName();
-		ArrayList<XmlElement> namedChildren = children.get(childName);
+		ArrayList<XmlElement> namedChildren = null;
+		namedChildren = children.get(childName);
 		if(namedChildren == null){
 			namedChildren = new ArrayList<XmlElement>();
 		}

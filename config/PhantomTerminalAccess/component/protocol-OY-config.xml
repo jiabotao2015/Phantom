@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocolComponent threadConfig="ListenerThreadsPool,MYFiX,2,20,200000,30000">
+	<!-- ET08协议接入 -->
+	<listener type="0" delay="0" period="0" value="oy_receive" taskCount="1" adaptername="cn.com.cnpc.vms.protocols.tcp.oy.adapter.ReceiveOYProtocolAdapter"/>
+		
+	<!-- ET08协议指令 -->
+	<listener type="0" delay="0" period="0" value="oy_command" taskCount="1" adaptername="cn.com.cnpc.vms.protocols.tcp.oy.adapter.CommandOYProtocolAdapter"/>	
+</protocolComponent>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dubbo>
+
+	<extensions>
+		<extension type="com.alibaba.dubbo.remoting.Transporter"
+			name="netty5" class="cn.com.cnpc.vms.common.service.dubbo.netty5.NettyTransporter" />
+		<extension type="com.alibaba.dubbo.rpc.cluster.LoadBalance"
+			name="consistenthashfix"
+			class="cn.com.cnpc.vms.common.service.dubbo.ConsistentHashLoadBalanceFix" />
+		<extension type="com.alibaba.dubbo.rpc.cluster.LoadBalance"
+			name="servicecallback"
+			class="cn.com.cnpc.vms.common.service.dubbo.ServiceCallbackLoadBalance" />
+	</extensions>
+
+	<application owner="guanhl" logger="log4j" logUrl="false"
+		name="terminalAccess-ServiceTest"
+		zkAddress="10.185.162.180:2222,10.185.162.181:2222,10.185.162.182:2222"
+		registry="true" transporter="netty" />
+
+	<consumer id="webinteraction"
+		interface="cn.com.cnpc.vms.api.webinteraction.IWebinteraction" check="false"
+		version="1.0.998" group="webinteraction" />
+
+	<provider id="terminalAccessService"
+		interface="cn.com.cnpc.vms.api.terminalaccess.ITerminalAccessService"
+		impl="cn.com.cnpc.vms.terminalaccess.service.TerminalAccessServiceImpl"
+		owner="guanhl" layer="bgServer" version="1.0.998" threads="10" port="-1"
+		group="terminal" loadbalance="servicecallback|terminalAccess" />
+
+	<!-- loadbalance="servicecallback|ternimalAccess" -->
+	<consumer id="alarmService" interface="cn.com.cnpc.vms.api.alarm.IAlarmService"
+		check="false" version="3.0.998" loadbalance="consistenthashfix" group="alarmcompute" />
+
+	<consumer id="reverseAddressService"
+		interface="cn.com.cnpc.vms.api.reverseaddress.IReverseAddressService"
+		check="false" version="3.0.998" group="address" />
+
+	<consumer id="distributedDataService"
+		interface="cn.com.cnpc.vms.api.distributeddata.IDistributedDataService"
+		check="false" version="1.0.0" group="distributed" />
+
+
+
+	<consumer id="dataForwardService"
+		interface="cn.com.cnpc.vms.api.dataforward.IDataForwardService" check="false"
+		version="1.0.998" group="dataForwardService" loadbalance="consistenthashfix" />
+
+	<provider id="webUpdateImpl" interface="cn.com.cnpc.vms.api.webinteraction.IWebUpdate"
+		impl="cn.com.cnpc.vms.terminalaccess.service.TerminalAccessServiceImpl"
+		layer="bgServer" version="1.0.998" threads="20" group="terminal"
+		loadbalance="servicecallback|terminalAccess" />
+
+
+	<consumer id="trigger" interface="cn.com.cnpc.vms.api.trigger.ITriggerService"
+		check="false" version="v1.0.0" group="trigger" />
+</dubbo>

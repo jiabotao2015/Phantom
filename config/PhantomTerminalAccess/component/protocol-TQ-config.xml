@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocolComponent threadConfig="ListenerThreadsPool,MYFiX,40,40,200000,30000">
+	<!-- 天琴协议接入 -->
+	<listener type="0" delay="0" period="0" value="tianq_receive" taskCount="20" adaptername="cn.com.cnpc.vms.protocols.tcp.TQ.adapter.ReceiveTQProtocolAdapter"/>
+		
+	<!-- 天琴协议指令 -->
+	<listener type="0" delay="0" period="0" value="tianq_command" taskCount="4" adaptername="cn.com.cnpc.vms.protocols.tcp.TQ.adapter.CommandTQProtocolAdapter"/>		
+</protocolComponent>

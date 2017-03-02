@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server todo="报警参数对照说明" clazz="cn.com.cnpc.vms.protocols.tcp.oy.mydeal.order.impl.OrderImpl_" nullclass=",1,109,546,551,542,552,89,94,536,93,20,">
+
+	<paramter name="1" identify="C1" description="单次点名指令"/>
+	<paramter name="533" identify="C21" description="油量查询"/>
+	<paramter name="552" identify="C1" description="里程查询"/>
+	<paramter name="551" identify="C2" description="报警确认清除指令"/>
+	<paramter name="92" identify="C4" description="GPRS通道短消息发送指令"/>
+	<paramter name="89" identify="C5" description="读终端参数指令"/>
+	<paramter name="542" identify="C6" description="读取行车记录仪记录数据指令"/>
+	<paramter name="524" identify="C8" description="监听指令"/>
+	<paramter name="546" identify="C19" description="即时拍摄指令"/>
+	
+	<paramter name="555,531,532" identify="S1" description="定时回报,定距回报,定时定距回报,定位监控消息以及历史记录间隔设置指令"/>
+	<paramter name="557" identify="S3" description="设置服务电话号码指令"/>
+	<paramter name="9" identify="S4" description="设置监控中心IP端口连接模式"/>
+	<paramter name="553,554,530" identify="S5" description="超速报警速度设置,超速报警持续时间设置,取消报警设置,限速设置指令"/>
+	<paramter name="550,109" identify="S6" description="设置矩形电子围栏指令,删除围栏指令"/>
+	<paramter name="528" identify="S7" description="疲劳驾驶参数设置指令"/>
+	<paramter name="536" identify="S10" description="里程清零指令"/>
+	<paramter name="20" identify="S12" description="终端重启指令"/>
+	<paramter name="94" identify="S13" description="恢复出厂设置指令"/>
+</server>

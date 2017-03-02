@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocolComponent threadConfig="ListenerThreadsPool,MYFiX,150,150,200000,30000" commandMessageConnectCache="_command_cache">
+
+	<!-- 终端指令 -->
+	<listener type="0" delay="0" period="0" value="terminal_command" taskCount="2" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.TerminalCommandAdapter"/>
+	<!-- 推送给Web的数据 -->
+	<listener type="0" delay="0" period="0" value="sendToWebServer" taskCount="20" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.WebServerAdapter"/>
+	<!-- 推送给报警服务的数据 -->
+	<listener type="0" delay="0" period="0" value="sendToAlarmServer" taskCount="20" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.AlarmServerAdapter"/>
+	<!-- 数据存储 -->
+	<listener type="0" delay="0" period="0" value="data_store" taskCount="4" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.GpsDataStoreAdapter"/>
+	<!-- 预警数据 -->
+	<listener type="0" delay="0" period="0" value="warning_store" taskCount="4" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.WarningDataStoreAdapter"/>
+	<!-- 报警数据 -->
+	<listener type="0" delay="0" period="0" value="alarm_store" taskCount="4" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.AlarmDataStoreAdapter"/>
+	<!-- 区域查询数据 -->
+	<listener type="0" delay="0" period="0" value="areaquery_store" taskCount="4" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.AreaQueryDataStoreAdapter"/>
+	<!-- 逆地址解析 -->
+	<listener type="0" delay="0" period="0" value="reverse_address" taskCount="4" adaptername="cn.com.cnpc.vms.terminalaccess.adapter.ReverseAddressAdapter"/>
+
+	<properties>
+		<prop key="GPSdataList.size" value="5000"/>
+		<prop key="GPSdataList.submitTime" value="25000"/>
+		<prop key="ALARMdataList.size" value="5000"/>
+		<prop key="ALARMdataList.submitTime" value="26000"/>
+		<prop key="WARNdataList.size" value="5000"/>
+		<prop key="WARNdataList.submitTime" value="27000"/>
+		<prop key="AREAdataList.size" value="5000"/>
+		<prop key="AREAdataList.submitTime" value="28000"/>
+	</properties>
+	
+</protocolComponent>

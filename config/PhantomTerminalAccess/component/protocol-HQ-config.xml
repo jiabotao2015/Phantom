@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocolComponent threadConfig="ListenerThreadsPool,MYFiX,40,40,200000,30000">
+	<!-- 华强协议接入 -->
+	<listener type="0" delay="0" period="0" value="huaq_receive" taskCount="30" adaptername="cn.com.cnpc.vms.protocols.tcp.HQ.adapter.ReceiveHQProtocolAdapter"/>
+		
+	<!-- 华强协议指令 -->
+	<listener type="0" delay="0" period="0" value="huaq_command" taskCount="4" adaptername="cn.com.cnpc.vms.protocols.tcp.HQ.adapter.CommandHQProtocolAdapter"/>	
+</protocolComponent>
