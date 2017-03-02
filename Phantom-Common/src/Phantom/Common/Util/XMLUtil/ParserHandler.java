@@ -39,8 +39,8 @@ public class ParserHandler extends DefaultHandler {
 		// 判断是否追加到上一个结点
 		int elementStackSize = elementStack.size();
 		if (elementStackSize > 0) {
-			XmlElement containingElement = (XmlElement) elementStack.getLast();
-			containingElement.setChildElement(newElement);
+			XmlElement containingElement = elementStack.getLast();
+			containingElement.addChild(newElement);
 		} else {
 			rootElement = newElement;
 		}

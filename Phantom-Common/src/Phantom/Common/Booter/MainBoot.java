@@ -16,14 +16,15 @@ public class MainBoot extends BootTools implements IBoot{
 		FileReader file_reader = new FileReader(params[0] + params[1]);
 		xmlConfig = new XmlParser(new FileReader(params[0] + params[1]));
 		rootElement = xmlConfig.parse();
-		String threadConfig = rootElement.getAttributes("threadConfig");
-		String serverName = rootElement.getAttributes("name");
+		String threadConfig = rootElement.getAttribute("threadConfig");
+		String serverName = rootElement.getAttribute("name");
 		
 		List<XmlElement> connectList = rootElement.getChildElements("connectname");
 		for(int i=0;i<connectList.size();i++){
 			XmlElement xmlElementTem = connectList.get(i);
-			connectNames = xmlElementTem.getAttributes("value").split("\\|");
-			
+			connectNames = xmlElementTem.getAttribute("value").split("\\|");
+			System.out.println(connectNames);
+			System.out.println(i);
 		}
 		return false;
 	}
