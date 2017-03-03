@@ -1,29 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server type="TerminalAccess" name="TerminalAccess1" threadConfig="TerminalAccess_Pool,MYFiX,5,10,200000,30000">
-	<connectname value="reverse_address|areaquery_store|alarm_store|warning_store|data_store|et08_receive|et08_command|tianq_receive|tianq_command|huaq_receive|huaq_command|t808_receive|t808_command|receive_response|terminal_command|sendToWebServer|sendToAlarmServer"/>
-
-	<!-- DUBBO服务提供者 -->
-	<remoteServiceFacotry filename="dubbo-service.xml" factoryClass="cn.com.cnpc.vms.common.service.dubbo.DubboServiceManager"/>
-
-	<!-- UDP数据接收 (grizzly) -->
-	<!-- TCP数据接收 (grizzly) -->
-	<component id="0" fileName="udpReceiveComponent-config.xml" name="cn.com.cnpc.vms.component.netty.udpreceivecomponent.UdpReceiveComponent"/>
-	<component id="1" fileName="tcpReceiveComponent-config.xml" name="cn.com.cnpc.vms.component.grizzly.tcpreceivecomponent.TcpReceiveComponent"/>
-	<!-- UDP数据接收 (netty) -->
-	<!-- TCP数据接收 (netty) -->
-
-	<!-- <component id="0" fileName="udpReceiveComponent-config.xml" name="cn.com.cnpc.vms.component.netty.newudpreveicecomponent.UdpReceiveComponent" 
-		/> <component id="1" fileName="tcpReceiveComponent-config.xml" name="cn.com.cnpc.vms.component.netty.tcpreceivecomponent.TcpReceiveComponent" 
-		/> -->
-	<component id="2" fileName="protocolComponent-config.xml" name="cn.com.cnpc.vms.terminalaccess.component.ProtocolControlComponent"/>
-	<!-- kafka -->
-	<component id="3" fileName="messagecomponent-config.xml" name="cn.com.cnpc.vms.component.messagecomponent.MessageComponent"/>
-	<component id="4" fileName="protocol-T808-config.xml" name="cn.com.cnpc.vms.protocols.tcp.T808.component.ProtocolT808ControlComponent"/>
-	<!-- 华强协议 -->
-	<component id="5" fileName="protocol-HQ-config.xml" name="cn.com.cnpc.vms.protocols.tcp.HQ.component.ProtocolHQControlComponent"/>
-	<!-- 天琴协议 -->
-	<component id="6" fileName="protocol-TQ-config.xml" name="cn.com.cnpc.vms.protocols.tcp.TQ.component.ProtocolTQControlComponent"/>
-	<!-- 易特80协议 -->
-	<component id="7" fileName="protocol-ET08-config.xml" name="cn.com.cnpc.vms.protocols.tcp.ET08.component.ProtocolET08ControlComponent"/>
-
+	<component id="0" fileName="udpReceiveComponent-config.xml" name="Phantom.TerminalAccess.Component.TestComponent"/>
 </server>

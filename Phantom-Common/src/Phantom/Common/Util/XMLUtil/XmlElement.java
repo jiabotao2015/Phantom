@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * @Project CNPC_VMS
@@ -75,7 +77,7 @@ public class XmlElement implements Serializable {
 	 */
 	public void addChild(XmlElement child) {
 		String childName = child.getName();
-		/*Array*/List<XmlElement> namedChildren = /*(List)*/ children.get(childName);
+		List<XmlElement> namedChildren = children.get(childName);
 		// 子节点空就创建，像个树
 		if (namedChildren == null) {
 			namedChildren = new ArrayList<XmlElement>();
@@ -218,11 +220,13 @@ public class XmlElement implements Serializable {
 		buffer.append(name); // 名字
 
 		// 迭代属性
-		Iterator iter = attributes.entrySet().iterator();
+		//Iterator iter = attributes.entrySet().iterator();
+		Set<Entry<String, String>> set = attributes.entrySet();
+		Iterator<Entry<String, String>> iter = set.iterator();
 
 		// 属性拼接
 		while (iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
+			Entry<String, String>entry =/* (Map.Entry)*/ iter.next();
 			buffer.append(' ');
 			buffer.append((String) entry.getKey());
 			buffer.append("=\"");
