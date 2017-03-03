@@ -28,24 +28,14 @@ public class MainBoot extends BootTools implements IBoot{
 
 	@Override
 	public boolean init(String[] params) throws FileNotFoundException, XmlException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		FileReader file_reader = new FileReader(params[0] + params[1]);
+		// TODO 获取rootElement，其中应该包含线程池策略，组件信息等
+		
 		xmlConfig = new XmlParser(new FileReader(params[0] + params[1]));
 		rootElement = xmlConfig.parse();
-		String threadConfig = rootElement.getAttribute("threadConfig");
-		String serverName = rootElement.getAttribute("name");
 		
-		List<XmlElement> connectList = rootElement.getChildElements("connectname");
-		List<XmlElement> connectList2 = rootElement.getChildElements("component");
-		List<XmlElement> connectList3 = rootElement.getChildElements("component");
-		for(int i=0;i<connectList.size();i++){
-			XmlElement xmlElementTem = connectList.get(i);
-			connectNames = xmlElementTem.getAttribute("value").split("\\|");
-			System.out.println(connectNames);
-			System.out.println(i);
-		}
+		//rootElement
+		//获取组件并初始化
 		getComponentXMLEliment(rootElement);
-		
 		initEachComponent(components_list);
 		return false;
 	}
