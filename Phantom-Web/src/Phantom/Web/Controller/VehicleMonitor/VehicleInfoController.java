@@ -12,5 +12,10 @@ public class VehicleInfoController {
 		System.out.println(Message);
 		return "VehicleInfo_Action中文测试！@#￥1234!@#$";
 	}
+	
+	@RequestMapping(value = "/VehicleMonitor/Map")
+	public String Map(){
+		return "VehicleMonitor/Map";
+	}
 
 }

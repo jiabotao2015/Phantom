@@ -14,6 +14,7 @@
 	<context:component-scan base-package="Phantom.Web.Controller"/>
 	
 	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/"/>
+	<mvc:resources mapping="/OpenLayers/**" location="/Resources/OpenLayers/"/>
 	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/"/>
 	<mvc:resources mapping="/Icons/**" location="/Resources/Icons/"/>
 	<mvc:resources mapping="/AppJS/**" location="/AppJS/"/>

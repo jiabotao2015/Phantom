@@ -34,9 +34,6 @@ public class DefaultController {
 	 */
 	@RequestMapping(value = "/Login")
 	public String Login(){
-		@SuppressWarnings("resource")
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("bean.xml");
-		ctx.getBean("");
 		return "Login";
 		
 	}
@@ -62,11 +59,6 @@ public class DefaultController {
 			
 		}
 		return new ModelAndView("redirect:/Login");
-	}
-	
-	@RequestMapping(value = "/VehicleMonitor/Map")
-	public String Map(){
-		return "VehicleMonitor/Map";
 	}
 	
 	/**
