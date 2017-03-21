@@ -3,9 +3,7 @@ package Phantom.TerminalAccess;
 import java.io.FileNotFoundException;
 
 import Phantom.Common.Booter.MainBoot;
-import Phantom.Common.Component.AbstractComponent;
 import Phantom.Common.Util.XMLUtil.XmlException;
-import Phantom.TerminalAccess.Component.TestComponent;
 
 public class TerminalAccessStartup extends MainBoot {
 	
