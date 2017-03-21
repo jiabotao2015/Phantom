@@ -10,5 +10,10 @@ public class OpenLayerController {
 	public String MainMapUrl(){
 		return "GIS/MainMap";
 	}
+	
+	@RequestMapping(value = "/BingMap")
+	public String BingMapUrl(){
+		return "GIS/BingMap";
+	}
 
 }

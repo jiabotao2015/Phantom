@@ -3,7 +3,7 @@
  * 支持高德地图切片图层、卫星图层、路网图层、实时交通图层
  * 依赖Openlayers、高德地图API
  */
-OpenLayers.Layer.Amap = ol.Class(ol.Layer.XYZ, {
+OpenLayers.Layer.Amap = ol.source(ol.Layer.XYZ, {
     url: null,
     wrapDateLine: true,
     amapLayer: null,	// 高德地图图层

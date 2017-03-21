@@ -18,21 +18,9 @@
 <!-----------------------------------------          高德地图JS API         ----------------------------------->
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=69530ee21ebcfaa0471ed23a15ba62f7"></script>
 
-<style type="text/css">
-body, html, #map {
-	height: 100%;
-	margin: 0px;
-}
-</style>
 <title>MainMap</title>
 </head>
 <body>"Phantom-Web/WebContent/AppJS/GIS/OpenLayer-AMap.js"
 	<div class="container" id="map" tabindex="0"></div>
 </body>
-<script type="text/javascript">
-	var map = new AMap.Map('map');
-	map.setZoom(10);
-	map.setCenter([ 116.39, 39.9 ]);
-</script>
-<script src="./AppJS/V4/ol.js"></script>
 </html>
