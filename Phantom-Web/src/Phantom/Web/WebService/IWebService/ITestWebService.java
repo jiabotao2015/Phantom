@@ -3,7 +3,7 @@
 * @Title: 
 * @Package Phantom.Web.WebService.IWebService
 * @Files: ITestWebService.java
-* @Description: TODO
+* @Description: Spring 集成 webservice 接口
 * @author jiabotao 
 * @date 2017年2月24日 下午11:33:08
 * @version V1.0   

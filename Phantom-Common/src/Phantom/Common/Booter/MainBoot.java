@@ -28,7 +28,7 @@ public class MainBoot extends BootTools implements IBoot{
 
 	@Override
 	public boolean init(String[] params) throws FileNotFoundException, XmlException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// TODO 获取rootElement，其中应该包含线程池策略，组件信息等
+		//获取rootElement，其中应该包含线程池策略，组件信息等
 		
 		xmlConfig = new XmlParser(new FileReader(params[0] + params[1]));
 		rootElement = xmlConfig.parse();
@@ -79,7 +79,7 @@ public class MainBoot extends BootTools implements IBoot{
 	}
 
 	private  void initEachComponent(ArrayList<Map<String, String>> components) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// TODO Auto-generated method stub
+		// 逐个初始化组件，并加入到本地map中做保存
 		for(int i=0;i<components.size();i++){
 			Map<String, String> component_map = components.get(i);
 			String component_classname = component_map.get("Name");

@@ -3,7 +3,7 @@
 * @Title: 
 * @Package Phantom.API.Util
 * @Files: DateUtil.java
-* @Description: TODO
+* @Description: 日期工具类
 * @author jiabotao 
 * @date 2017年2月22日 下午11:55:17
 * @version V1.0   

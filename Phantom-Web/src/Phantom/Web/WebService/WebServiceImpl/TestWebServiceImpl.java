@@ -3,7 +3,7 @@
 * @Title: 
 * @Package Phantom.Web.WebService.WebServiceImpl
 * @Files: TestWebServiceImpl.java
-* @Description: TODO
+* @Description: webservice 实现类
 * @author jiabotao 
 * @date 2017年2月24日 下午11:34:37
 * @version V1.0   
@@ -19,7 +19,6 @@ public class TestWebServiceImpl implements ITestWebService {
 	 */
 	@Override
 	public String sayHello() {
-		// TODO Auto-generated method stub
 		return "Hello";
 	}
 

@@ -1,7 +1,7 @@
 /**
  * @Project: Phantom
  * @Title: 公用模块|dbcp连接池
- * @Description: TODO
+ * @Description: dbcp连接池
  * @Author: jiabotao
  * @Date: 2017年3月21日 下午6:31:15
  * @Company: 

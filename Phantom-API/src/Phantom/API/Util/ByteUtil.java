@@ -3,7 +3,7 @@
 * @Title: 
 * @Package Phantom.API.Util
 * @Files: ByteUtil.java
-* @Description: TODO
+* @Description: 数组工具类
 * @author jiabotao 
 * @date 2017年2月22日 下午11:54:59
 * @version V1.0   
