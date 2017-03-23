@@ -3,7 +3,7 @@
 * @Title: 
 * @Package Phantom.Common.MessageQueue
 * @Files: MessageQueueManager.java
-* @Description: TODO
+* @Description: 
 * @author jiabotao 
 * @date 2017年3月5日 上午12:03:39
 * @version V1.0   

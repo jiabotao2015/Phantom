@@ -72,7 +72,6 @@ public class LoginSessionListener implements HttpSessionAttributeListener {
 	 */
 	@Override
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		// TODO Auto-generated method stub
 
 	}
 

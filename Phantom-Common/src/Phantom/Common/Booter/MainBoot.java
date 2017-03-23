@@ -44,14 +44,12 @@ public class MainBoot extends BootTools implements IBoot{
 
 	@Override
 	public boolean start() {
-		// TODO Auto-generated method stub
 		
 		return false;
 	}
 
 	@Override
 	public boolean stop() {
-		// TODO Auto-generated method stub
 		Set<Entry<String, AbstractComponent>> Component_Set = components_map.entrySet();
 		Iterator<Entry<String, AbstractComponent>>  Component_Iter = Component_Set.iterator();
 		while(Component_Iter.hasNext()){
@@ -64,7 +62,6 @@ public class MainBoot extends BootTools implements IBoot{
 	
 	//解析component，一个组件对应一个配置文件和一个组件类
 	private void getComponentXMLEliment(XmlElement rootElement) {
-		// TODO Auto-generated method stub
 		List<XmlElement> component_xml_List = rootElement.getChildElements("component");
 		for(int i=0;i<component_xml_List.size();i++){
 			XmlElement element = component_xml_List.get(i);
