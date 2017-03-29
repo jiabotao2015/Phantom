@@ -1,4 +1,4 @@
-package Phantom.Web.GisService;
+package Phantom.Web.Service.Gemotry;
 
 import javax.annotation.Resource;
 
@@ -9,14 +9,14 @@ import Phantom.Web.GISDao.GisPointDao;
 import Phantom.Web.GISModel.Point;
 
 @Service
-public class GisPointService {
+public class PointService {
 	
 	@Resource
 	GisPointDao dao;
 	
 	@Transactional(readOnly = false)
-	public void saveUser(Point user) {
-		dao.save(user);
+	public void save(Point point) {
+		dao.save(point);
 	}
 
 }

@@ -30,8 +30,8 @@
 		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="postgres" />
-		<property name="password" value="postgres" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- <property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
 		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> -->
@@ -40,8 +40,8 @@
 		destroy-method="close">
 		<property name="driverClass" value="${gis.driverClass}" />
 		<property name="jdbcUrl" value="${gis.url}" />
-		<property name="user" value="postgres" />
-		<property name="password" value="postgres" />
+		<property name="user" value="${gis.user}" />
+		<property name="password" value="${gis.password}" />
 		<!-- <property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
 		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> -->
@@ -50,7 +50,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="DataSource" />
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="jpaVendorAdapter" ref="PostgreSQLAdapter" />
 		<property name="packagesToScan" value="Phantom.Web.Model" /><!--待扫描的实体类包，不再需要persistence.xml了 -->
 		<property name="jpaProperties">
 			<props>
@@ -64,7 +64,7 @@
 	<bean id="GISEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="GISDateSource" />
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="jpaVendorAdapter" ref="PostgreSQLAdapter" />
 		<property name="packagesToScan" value="Phantom.Web.GISModel" /><!--待扫描的实体类包，不再需要persistence.xml了 -->
 		<property name="jpaProperties">
 			<props>
@@ -76,7 +76,7 @@
 	</bean>
 
 	<!--指定实现JPA的适配器 -->
-	<bean id="hibernateJpaVendorAdapter"
+	<bean id="PostgreSQLAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 	</bean>

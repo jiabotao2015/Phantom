@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
-import Phantom.Web.GisService.GisPointService;
+import Phantom.Web.GISModel.Point;
+import Phantom.Web.Model.User;
+import Phantom.Web.Service.Gemotry.PointService;
 import Phantom.Web.Service.SystemManage.UserService;
 
 
@@ -31,7 +33,7 @@ public class DefaultController {
 	private UserService userService;
 	
 	@Autowired
-	private GisPointService pointService;
+	private PointService pointService;
 
 	/**
 	 * @Description 登录URI跳转
@@ -55,6 +57,17 @@ public class DefaultController {
 	public ModelAndView LoginAction(String Email, String password, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		System.out.println(request.getCharacterEncoding());
+		User me = new User();
+		me.setUserName("jiabotao");
+		me.setPassWord("jiabotao0819");
+		session.setAttribute("user", me);
+		userService.saveUser(me);
+		
+		
+		Point pt = new Point();
+		pt.setGemo("this is the_geom for describe the pont shape");
+		pt.setPointName("贾博韬测试点");
+		pointService.save(pt);
 		/*User user = new User();
 		if (Email.equals("jiabotao@gmail.com") && password.equals("jiabotao")) {
 			user.setUserId(1);
@@ -65,9 +78,8 @@ public class DefaultController {
 
 		}
 		
-		Phantom.Web.Model.User me  = new Phantom.Web.Model.User();
-		me.setPassword("jiabotao0819");
-		me.setUsername("jiabotao");
+		Point
+		
 		userService.saveUser(me);*/
 		return new ModelAndView("redirect:/Login");
 	}

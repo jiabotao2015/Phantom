@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
-import Phantom.API.Bean.User;
+import Phantom.Web.Model.User;
 
 public class LoginSessionListener implements HttpSessionAttributeListener {
 
