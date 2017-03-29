@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
-import Phantom.Web.GISModel.Point;
+import Phantom.Web.Gis.Entity.CityPoint;
+import Phantom.Web.Gis.Service.CityPintService;
 import Phantom.Web.Model.User;
-import Phantom.Web.Service.Gemotry.PointService;
 import Phantom.Web.Service.SystemManage.UserService;
 
 
@@ -34,7 +34,7 @@ public class DefaultController {
 	private UserService userService;
 	
 	@Autowired
-	private PointService pointService;
+	private CityPintService pointService;
 
 	/**
 	 * @Description 登录URI跳转
@@ -71,6 +71,8 @@ public class DefaultController {
 		pt.setGemo("this is the_geom for describe the pont shape");
 		pt.setPointName("贾博韬测试点");
 		pointService.save(pt);*/
+		CityPoint cp = pointService.getCity(1);
+		System.out.println(cp.getCityName());
 		return new ModelAndView("redirect:/Login");
 	}
 

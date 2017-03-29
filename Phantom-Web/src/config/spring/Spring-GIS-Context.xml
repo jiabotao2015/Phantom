@@ -22,31 +22,18 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/datasource/postgresql.properties</value>
-				<value>classpath:config/datasource/postgis.properties</value>
+				<!-- <value>classpath:config/datasource/postgis.properties</value> -->
 			</list>
 		</property>
 	</bean>
 	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driverClass}" />
-		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.user}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- <property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
-		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
-		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> -->
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/DemoDB" />
+		<property name="user" value="postgres" />
+		<property name="password" value="postgres" />
 	</bean>
-	<bean id="GISDateSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${gis.driverClass}" />
-		<property name="jdbcUrl" value="${gis.url}" />
-		<property name="user" value="${gis.user}" />
-		<property name="password" value="${gis.password}" />
-		<!-- <property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
-		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
-		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> -->
-	</bean>
-
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="DataSource" />
@@ -60,35 +47,13 @@
 			</props>
 		</property>
 	</bean>
-	<!-- JPA实体管理工厂的配置 -->
-	<bean id="GISEntityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="GISDateSource" />
-		<property name="jpaVendorAdapter" ref="PostgreSQLAdapter" />
-		<property name="packagesToScan" value="Phantom.Web.GISModel" /><!--待扫描的实体类包，不再需要persistence.xml了 -->
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
-		</property>
-		<property name="jpaDialect">  
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>  
-        </property>  
-	</bean>
-
+	
 	<!--指定实现JPA的适配器 -->
 	<bean id="PostgreSQLAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 	</bean>
-
-	<!-- 配置事务管理器 -->
-    <bean id="GISTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="GISEntityManagerFactory"/>
-    </bean>
- 	
+	
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -96,12 +61,41 @@
  	
  	<!-- 启用 annotation事务注解-->
     <tx:annotation-driven transaction-manager="transactionManager"/> 
-    
-    <!-- 启用 annotation事务注解-->
+        
+	<jpa:repositories base-package="Phantom.Web.Dao" entity-manager-factory-ref="entityManagerFactory"  transaction-manager-ref="transactionManager" />
+	
+	
+	
+	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/GISDemo" />
+		<property name="user" value="postgres" />
+		<property name="password" value="postgres" />
+	</bean>
+	<bean id="GisEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="GisDataSource" />
+		<property name="jpaVendorAdapter" ref="GisHibernateJpaVendorAdapter" />
+		<property name="packagesToScan" value="Phantom.Web.Gis.Entity" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="GisHibernateJpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
+	</bean>
+
+    <bean id="GisTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="GisEntityManagerFactory"/>
+    </bean>
+ 	
     <tx:annotation-driven transaction-manager="GISTransactionManager"/> 
 
-    <!-- 配置Spring Data JPA扫描目录扫描所有的DAO-->
- 	<jpa:repositories base-package="Phantom.Web.GISDao" entity-manager-factory-ref="GISEntityManagerFactory"  transaction-manager-ref="GISTransactionManager" />
-	<jpa:repositories base-package="Phantom.Web.Dao" entity-manager-factory-ref="entityManagerFactory"  transaction-manager-ref="transactionManager" />
-
+ 	<jpa:repositories base-package="Phantom.Web.Gis.Dao" entity-manager-factory-ref="GisEntityManagerFactory"  transaction-manager-ref="GisTransactionManager" />
 </beans>
