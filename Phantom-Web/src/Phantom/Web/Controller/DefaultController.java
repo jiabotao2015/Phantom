@@ -2,6 +2,7 @@ package Phantom.Web.Controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -60,27 +61,16 @@ public class DefaultController {
 		User me = new User();
 		me.setUserName("jiabotao");
 		me.setPassWord("jiabotao0819");
-		session.setAttribute("user", me);
-		userService.saveUser(me);
 		
-		
-		Point pt = new Point();
+		List<User> loginuser = userService.Login(Email, password);
+		if(loginuser.size()>0){
+			session.setAttribute("user", loginuser.get(0));
+			return new ModelAndView("redirect:/MainMap");
+		}
+		/*Point pt = new Point();
 		pt.setGemo("this is the_geom for describe the pont shape");
 		pt.setPointName("贾博韬测试点");
-		pointService.save(pt);
-		/*User user = new User();
-		if (Email.equals("jiabotao@gmail.com") && password.equals("jiabotao")) {
-			user.setUserId(1);
-			user.setUserName(Email);
-			user.setPassWord(password);
-			session.setAttribute("user", user);
-			return new ModelAndView("redirect:/Home");
-
-		}
-		
-		Point
-		
-		userService.saveUser(me);*/
+		pointService.save(pt);*/
 		return new ModelAndView("redirect:/Login");
 	}
 
@@ -101,27 +91,12 @@ public class DefaultController {
 	 */
 	@RequestMapping("/kaptcha/*")
 	public void getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
 		HttpSession session = request.getSession();
-
 		response.setDateHeader("Expires", 0);
-		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate"); // Set
-																					// standard
-																					// HTTP/1.1
-																					// no-cache
-																					// headers.
-		response.addHeader("Cache-Control", "post-check=0, pre-check=0"); // Set
-																			// IE
-																			// extended
-																			// HTTP/1.1
-																			// no-cache
-																			// headers
-																			// (use
-																			// addHeader).
-		response.setHeader("Pragma", "no-cache"); // Set standard HTTP/1.0
-													// no-cache header.
-		response.setContentType("image/jpeg"); // 告诉浏览器返回了一个图片balabala...
-
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+		response.addHeader("Cache-Control", "post-check=0, pre-check=0"); 
+		response.setHeader("Pragma", "no-cache");
+		response.setContentType("image/jpeg"); // 告诉浏览器返回了一个图片balabala..
 		String capText = kaptchaProducer.createText(); // 根据aplicationContext.xml配置生成字符串
 		session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText); // 在session中存储生成的验证码字符串
 		BufferedImage bi = kaptchaProducer.createImage(capText); // 根据验证码字符串生成BI流

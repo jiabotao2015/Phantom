@@ -1,5 +1,7 @@
 package Phantom.Web.Service.SystemManage;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,17 @@ public class UserService {
 	private UserDao userDao;
 
 	@Transactional(readOnly = false)
-	public void saveUser(User user) {
-		userDao.save(user);
+	public User saveUser(User user) {
+		return userDao.save(user);
+	}
+	
+	public User findUser(int userid){
+		return userDao.findOne(userid);
+	}
+	
+	public List<User> Login(String username,String password){
+		List<User> users = userDao.Login(username,password);
+		return users;
 	}
 
 }
