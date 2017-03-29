@@ -3,7 +3,6 @@ package Phantom.Web.Controller;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
-import Phantom.API.Bean.User;
+import Phantom.Web.GisService.GisPointService;
 import Phantom.Web.Service.SystemManage.UserService;
+
 
 @Controller
 public class DefaultController {
@@ -29,6 +29,9 @@ public class DefaultController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private GisPointService pointService;
 
 	/**
 	 * @Description 登录URI跳转
@@ -36,6 +39,7 @@ public class DefaultController {
 	 */
 	@RequestMapping(value = "/Login")
 	public String Login() {
+		
 		return "Login";
 
 	}
@@ -51,7 +55,7 @@ public class DefaultController {
 	public ModelAndView LoginAction(String Email, String password, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		System.out.println(request.getCharacterEncoding());
-		User user = new User();
+		/*User user = new User();
 		if (Email.equals("jiabotao@gmail.com") && password.equals("jiabotao")) {
 			user.setUserId(1);
 			user.setUserName(Email);
@@ -64,7 +68,7 @@ public class DefaultController {
 		Phantom.Web.Model.User me  = new Phantom.Web.Model.User();
 		me.setPassword("jiabotao0819");
 		me.setUsername("jiabotao");
-		userService.saveUser(me);
+		userService.saveUser(me);*/
 		return new ModelAndView("redirect:/Login");
 	}
 

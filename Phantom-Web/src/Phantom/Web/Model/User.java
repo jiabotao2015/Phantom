@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "i_user")
+@Table(name = "tb_user")
 public class User implements Serializable {
 	
 	/**
