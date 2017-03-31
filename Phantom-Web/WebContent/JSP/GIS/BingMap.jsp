@@ -27,31 +27,25 @@
         'ordnanceSurvey'
       ];
       var layers = [];
-      var i, ii;
-      for (i = 0, ii = styles.length; i < ii; ++i) {
+      for (var i = 0; i < styles.length; ++i) {
         layers.push(new ol.layer.Tile({
           visible: false,
           preload: Infinity,
           source: new ol.source.BingMaps({
             key: 'AnbQn6E4ec8NAER56JBhNCS88wOLYCg6TNVINbC2qHE7_zQQg583_GdBUWaHlqA-',
-            imagerySet: styles[i],
-            //culture:zh-cn
-            culture:el
-            // use maxZoom 19 to see stretched tiles instead of the BingMaps
-            // "no photos at this zoom level" tiles
-            // maxZoom: 19
+            imagerySet: styles[i]
           })
         }));
       }
+      
       var map = new ol.Map({
         layers: layers,
-        // Improve user experience by loading tiles while dragging/zooming. Will make
-        // zooming choppy on mobile or slow devices.
         loadTilesWhileInteracting: true,
         target: 'map',
         view: new ol.View({
-          center: [-6655.5402445057125, 6709968.258934638],
-          zoom: 13
+          center: [114.292653,30.614975],
+          zoom: 16,
+          projection:'EPSG:4326'
         })
       });
 
