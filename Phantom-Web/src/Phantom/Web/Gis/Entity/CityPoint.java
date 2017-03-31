@@ -9,13 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
-import org.hibernate.spatial.JTSGeometryType;
 
 @Entity
 @Table(name = "tb_city")
@@ -41,7 +38,7 @@ public class CityPoint implements Serializable{
 		this.shape = wktToGeometry(wkt);
 	}
 	
-	public CityPoint(String cityName,Point geom){
+	public CityPoint(String cityName,Geometry geom){
 		this.cityName=cityName;
 		this.shape = geom;
 	}
