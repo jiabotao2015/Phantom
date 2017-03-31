@@ -47,6 +47,8 @@ var gaode_layer = new ol.layer.Tile({
 	source : gaode_source
 });
 
+
+
 var map = new ol.Map({
 	target : 'map',
 	layers : [ gaode_layer ],
@@ -61,3 +63,14 @@ var map = new ol.Map({
 		zoom : 18
 	})
 });
+
+var citypoint_wms_layers = new ol.layer.Tile({
+	visible:true,
+	source:new ol.source.TileWMS({
+		url:'http://localhost:8888/geoserver/Phantom/wms',
+		params : {
+			LAYERS : 'Phantom:tb_city'
+		}
+	})
+});
+map.addLayer(citypoint_wms_layers);
