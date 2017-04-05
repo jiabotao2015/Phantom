@@ -15,5 +15,10 @@ public class OpenLayerController {
 	public String BingMapUrl(){
 		return "GIS/BingMap";
 	}
+	
+	@RequestMapping(value = "/ExampleMap")
+	public String wfsDemoMapUrl(){
+		return "GIS/Example/vector-wfs-getfeature";
+	}
 
 }

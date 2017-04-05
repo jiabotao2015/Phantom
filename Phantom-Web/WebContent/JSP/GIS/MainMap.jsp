@@ -22,7 +22,23 @@
 <title>MainMap</title>
 </head>
 <body>
-	<div id="map"></div>
+	<div id="map" class="map" style="height:1080px"></div>
+	<!-- <input id='jiabotao' type='button' calss="btn" value="sdasd"> -->
 </body>
 <script src="./AppJS/GIS/MainMap.js"></script>
+<!-- <script src="./AppJS/GIS/DrawLine.js"></script> -->
+<!-- <script>
+	$("#jiabotao").click(function(){
+		var features = source.getFeatures();
+		var feature = features[0];
+		var featureToGeometry = feature.getGeometry();
+		
+		/* var geoTool = new ol.format.GeoJSON({
+			defaultDataProjection:'EPSG:4326',
+			featureProjection:'EPSG:3857'
+		}); */
+		var geoTool = new ol.format.GeoJSON();
+		var featureTogeonson = geoTool.writeFeature(feature);
+	});
+</script> -->
 </html>
