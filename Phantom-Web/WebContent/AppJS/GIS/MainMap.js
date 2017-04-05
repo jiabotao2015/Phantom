@@ -1,9 +1,10 @@
 /**
  * 
  */
-var center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326','EPSG:3857');
+var center = ol.proj.transform([ 114.298729,30.574752 ], 'EPSG:4326',
+		'EPSG:3857');
 var origin = [ -20037508.3427892, 20037508.3427892 ];
-var extent = [ -20147508.3427892, -20147508.3427892, 20137508.3427892, 20137508.3427892 ];
+var extent = [ -20147508.3427892, -20147508.3427892, 20137508.3427892, 20137508.3427892  ];
 var resolutions = [];
 for (var i = 0; i < 21; i++) {
 	resolutions[i] = (extent[2] - extent[0]) / 256 / (Math.pow(2, i));
@@ -32,8 +33,8 @@ var gaode_source = new ol.source.TileImage(
 				var z = tileCoord[0];
 				var x = tileCoord[1];
 				var y = -tileCoord[2] - 1;
-
-				var url = "http://webst01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}";
+				//var url = "http://wprd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}"
+				var url = "http://webst02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}";
 				url = url.replace("{z}", z);
 				url = url.replace("{x}", x);
 				url = url.replace("{y}", y);
@@ -45,16 +46,23 @@ var gaode_layer = new ol.layer.Tile({
 	source : gaode_source
 });
 
-//空的source
+var gaode_layer = new ol.layer.Tile({
+	source : gaode_source
+});
+
+// 空的source
 var citypoint_vector_source = new ol.source.Vector();
 
 var pointStyle = new ol.style.Style({
-	image: new ol.style.Circle({
-		radius: 14,
-		snapToPixel: false,
-		fill: new ol.style.Fill({color: 'red'}),
-		stroke: new ol.style.Stroke({
-			color: 'white', width: 7
+	image : new ol.style.Circle({
+		radius : 14,
+		snapToPixel : false,
+		fill : new ol.style.Fill({
+			color : 'red'
+		}),
+		stroke : new ol.style.Stroke({
+			color : 'white',
+			width : 7
 		})
 	})
 });
@@ -62,12 +70,12 @@ var pointStyle = new ol.style.Style({
 // 新建城市点图层，source为空，后期加载
 var citypoint_vector_layer = new ol.layer.Vector({
 	source : citypoint_vector_source,
-	style :  pointStyle
+	style : pointStyle
 });
 
 var map = new ol.Map({
 	target : 'map',
-	layers : [ gaode_layer , citypoint_vector_layer ],
+	layers : [ gaode_layer, citypoint_vector_layer ],
 	view : new ol.View({
 		projection : 'EPSG:3857',
 		center : center,
@@ -85,9 +93,7 @@ var citypoint_wms_layers = new ol.layer.Tile({
 	})
 });
 
-//map.addLayer(citypoint_wms_layers);
-
-
+// map.addLayer(citypoint_wms_layers);
 
 var featureRequest = new ol.format.WFS().writeGetFeature({
 	srsName : 'EPSG:3857',
@@ -107,5 +113,5 @@ fetch('http://localhost:8888/geoserver/Phantom/ows', {
 	citypoint_vector_source.addFeatures(features);
 });
 
-//map.addLayer(citypoint_wms_layers);
+// map.addLayer(citypoint_wms_layers);
 
