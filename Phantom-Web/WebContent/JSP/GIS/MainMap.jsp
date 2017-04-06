@@ -24,5 +24,16 @@
 <body>
 	<div id="map" class="map" ></div>
 </body>
-<script src="./AppJS/GIS/MainMap.js"></script>
+<script src="./AppJS/GIS/MapAll.js"></script>
+<!-- <script src="./AppJS/GIS/DrawLine.js"></script> -->
+<script>
+	$(document).ready(function(){
+		MapApi.init();
+		MapApi.CenterAndZoom(116.397428,39.90923,11);
+		var all_layers = map.getLayers();
+		var layers_arr = all_layers.getArray();
+		var gaodelayer = layers_arr[0];
+		var aa = gaodelayer.get("name");
+	})
+</script>
 </html>
