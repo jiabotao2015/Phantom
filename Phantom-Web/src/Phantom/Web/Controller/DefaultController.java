@@ -42,9 +42,7 @@ public class DefaultController {
 	 */
 	@RequestMapping(value = "/Login")
 	public String Login() {
-		
 		return "Login";
-
 	}
 
 	/**
@@ -56,23 +54,15 @@ public class DefaultController {
 	 */
 	@RequestMapping(value = "/LoginAction")
 	public ModelAndView LoginAction(String Email, String password, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		System.out.println(request.getCharacterEncoding());
-		User me = new User();
-		me.setUserName("jiabotao");
-		me.setPassWord("jiabotao0819");
 		
+		HttpSession session = request.getSession();
 		List<User> loginuser = userService.Login(Email, password);
 		if(loginuser.size()>0){
 			session.setAttribute("user", loginuser.get(0));
+			CityPoint cp = pointService.getCity(9);
+			System.out.println(cp.getCityName());
 			return new ModelAndView("redirect:/MainMap");
 		}
-		/*Point pt = new Point();
-		pt.setGemo("this is the_geom for describe the pont shape");
-		pt.setPointName("贾博韬测试点");
-		pointService.save(pt);*/
-		CityPoint cp = pointService.getCity(1);
-		System.out.println(cp.getCityName());
 		return new ModelAndView("redirect:/Login");
 	}
 
