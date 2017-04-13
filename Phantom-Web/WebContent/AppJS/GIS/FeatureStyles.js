@@ -1,7 +1,7 @@
 /**
  * 定义各种要素样式
  */
-var Style = {
+var FeatureStyles = {
 	/**
 	 * 线路样式
 	 */
