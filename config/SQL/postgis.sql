@@ -1,0 +1,10 @@
+CREATE EXTENSION postgis;
+CREATE EXTENSION address_standardizer;
+CREATE EXTENSION pointcloud;
+CREATE EXTENSION pointcloud_postgis;
+CREATE EXTENSION ogr_fdw;
+CREATE EXTENSION pgrouting;
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION postgis_tiger_geocoder;
+CREATE EXTENSION postgis_sfcgal;
+CREATE EXTENSION postgis_topology;
