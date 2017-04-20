@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 var center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326',
 		'EPSG:3857');
@@ -145,7 +145,7 @@ var MapApi = {
 		draw.on('drawend', function(evt) {
 			var feature = evt.feature;
 			feature.set('cityname','zheci');
-			
+
 			var geom = feature.getGeometry();
 			feature.set('the_geom',geom);
 			var features_arr = [ feature ];
@@ -195,5 +195,9 @@ var MapApi = {
 		});
 		map.addInteraction(draw);
 	},
+	'viewTrack': function(points) {
+		//第一步把点变成mutiline,在line层展现
+		//第二步在point层做点的轨迹运动
+	}
 
 }
