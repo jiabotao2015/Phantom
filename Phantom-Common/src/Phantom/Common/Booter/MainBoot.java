@@ -36,8 +36,8 @@ public class MainBoot extends BootTools implements IBoot{
 		//rootElement
 		//获取组件并初始化
 		getComponentXMLEliment(rootElement);
-		initEachComponent(components_list);
-		return false;
+		boolean component_is_inited = initEachComponent(components_list);
+		return component_is_inited;
 	}
 
 	
@@ -75,22 +75,30 @@ public class MainBoot extends BootTools implements IBoot{
 		
 	}
 
-	private  void initEachComponent(ArrayList<Map<String, String>> components) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	private boolean initEachComponent(ArrayList<Map<String, String>> components){
+		boolean compoent_is_inited = false;
 		// 逐个初始化组件，并加入到本地map中做保存
 		for(int i=0;i<components.size();i++){
 			Map<String, String> component_map = components.get(i);
 			String component_classname = component_map.get("Name");
 			String filename = component_map.get("FileName");
-			AbstractComponent component = (AbstractComponent) Class.forName(component_classname).newInstance();
+			AbstractComponent component = null;
+			try {
+				component = (AbstractComponent) Class.forName(component_classname).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
 			//init component set 各种值，外加配置文件
 			log.info("开始初始化： "+component_classname+" 组件");
-			boolean initialized = component.init(new String[] {("/component" + filename)});
-			if(initialized){
+			compoent_is_inited = component.init(new String[] {("/component/" + filename)});
+			if(compoent_is_inited){
 				//存入一个map可以拱关闭使用
 				components_map.put(component_classname, component);
 				log.info("组件: "+component_classname+" 初始化成功");
 			}
 		}
+		return compoent_is_inited;
 		
 	}
 

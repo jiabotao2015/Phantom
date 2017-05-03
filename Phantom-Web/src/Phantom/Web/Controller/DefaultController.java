@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
-import Phantom.Web.Gis.Entity.CityPoint;
+//import Phantom.Web.Gis.Entity.CityPoint;
 import Phantom.Web.Gis.Service.CityPintService;
 import Phantom.Web.Model.User;
 import Phantom.Web.Service.SystemManage.UserService;
@@ -59,10 +59,11 @@ public class DefaultController {
 		List<User> loginuser = userService.Login(Email, password);
 		if(loginuser.size()>0){
 			session.setAttribute("user", loginuser.get(0));
-			CityPoint cp = pointService.getCity(9);
-			System.out.println(cp.getCityName());
+			//CityPoint cp = pointService.getCity(9);
+			//System.out.println(cp.getCityName());
 			return new ModelAndView("redirect:/MainMap");
 		}
+		pointService.toString();
 		return new ModelAndView("redirect:/Login");
 	}
 

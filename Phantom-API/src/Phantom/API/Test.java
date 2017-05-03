@@ -1,7 +1,5 @@
 package Phantom.API;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import Phantom.API.Bean.LonLat;
 import Phantom.API.Util.LngLatUtil;

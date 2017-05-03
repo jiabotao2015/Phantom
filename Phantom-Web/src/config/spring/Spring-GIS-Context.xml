@@ -29,7 +29,7 @@
 	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/DemoDB" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/Phantom" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -69,7 +69,7 @@
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/GISDemo" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>

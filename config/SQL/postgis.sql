@@ -43,7 +43,7 @@ CREATE TABLE public.tb_area
 WITH (
     OIDS = FALSE
 );
-ALTER TABLE public.tb_road OWNER to postgres;
+ALTER TABLE public.tb_area OWNER to postgres;
 
 -- 添加几何字段
-SELECT AddGeometryColumn('public','tb_point','the_geom',4326,'POINT',2);
+-- SELECT AddGeometryColumn('public','tb_point','the_geom',4326,'POINT',2);

@@ -41,7 +41,7 @@
 <script>
 	$(document).ready(function() {
 		
-		MapApi.initMap();
+		MapApi.init();
 		
 		$("#btn_get_beijng").click(function() {
 			MapApi.CenterAndZoom(116.397428, 39.90923, 11);

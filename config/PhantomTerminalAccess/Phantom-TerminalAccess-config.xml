@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server type="TerminalAccess" name="TerminalAccess1" threadConfig="TerminalAccess_Pool,MYFiX,5,10,200000,30000">
+<server type="TerminalAccess" name="TerminalAccess" threadConfig="TerminalAccess_Pool,MYFiX,5,10,200000,30000">
 	<component id="0" fileName="udpReceiveComponent-config.xml" name="Phantom.TerminalAccess.Component.TestComponent"/>
+	<component id="1" fileName="protocol-T808-config.xml" name="Phantom.TerminalAccess.Component.TestComponent"/>
 </server>

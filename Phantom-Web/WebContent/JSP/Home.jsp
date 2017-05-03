@@ -17,10 +17,12 @@ body, html, #container {
 	margin: 0px;
 }
 </style>
+<link href="http://openlayers.org/en/master/css/ol.css" rel="stylesheet"/>
+<script src="http://openlayers.org/en/master/build/ol.js"></script>
 <title>Phantom Home</title>
 </head>
 <body>
-	<div class="container" id="container" tabindex="0"></div>
+	<div id="map"></div>
 </body>
 <script type="text/javascript">
 	var map = new AMap.Map('container');
