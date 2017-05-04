@@ -20,5 +20,10 @@ public class OpenLayerController {
 	public String wfsDemoMapUrl(){
 		return "GIS/Example/vector-wfs-getfeature";
 	}
+	
+	@RequestMapping(value = "/GoogleMap")
+	public String GoogleMapUrl(){
+		return "GIS/OpenLayersWithGoogleMap";
+	}
 
 }

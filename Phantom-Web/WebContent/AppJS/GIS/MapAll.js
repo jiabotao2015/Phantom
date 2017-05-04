@@ -82,6 +82,50 @@ var MapApi = {
 			})
 		});
 	},
+	
+	'initGMap': function(){ 
+		center = ol.proj.transform([ -74.04455, 40.6893 ], 'EPSG:4326','EPSG:3857');
+		
+		var GoogleSource = new ol.source.OSM({
+			url: 'http://mt{0-3}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+	          attributions: [
+	              new ol.Attribution({ html: '© Google' }),
+	              new ol.Attribution({ html: '<a href="https://developers.google.com/maps/terms">Terms of Use.</a>' })
+	          ]
+		});
+		
+		var google_layer = new ol.layer.Tile({
+			source : GoogleSource,
+			name : 'GoogleSource'
+		});
+		
+		var mousePositionControl = new ol.control.MousePosition({
+			coordinateFormat : ol.coordinate.createStringXY(6),
+			projection : 'EPSG:4326',
+			// comment the following two lines to have the mouse position
+			// be placed within the map.
+			className : 'custom-mouse-position',
+			target : document.getElementById('mouse-position'),
+			undefinedHTML : '&nbsp;'
+		});
+		
+		map = new ol.Map({
+			target : 'map',
+			controls : ol.control.defaults({
+				attributionOptions : /** @type {olx.control.AttributionOptions} */
+				({
+					collapsible : true
+				})
+			}).extend([ mousePositionControl ]),
+			layers : [ google_layer ],
+			view : new ol.View({
+				projection : 'EPSG:3857',
+				center : center,
+				zoom : 12
+			})
+		});
+		
+	},
 
 	'CenterAndZoom' : function(Lng, lat, zoom) {
 		var center = ol.proj.transform([ Lng, lat ], 'EPSG:4326', 'EPSG:3857');
