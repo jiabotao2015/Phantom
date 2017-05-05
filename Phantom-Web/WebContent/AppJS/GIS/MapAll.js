@@ -84,7 +84,7 @@ var MapApi = {
 	},
 	
 	'initGMap': function(){ 
-		center = ol.proj.transform([ -74.04455, 40.6893 ], 'EPSG:4326','EPSG:3857');
+		center = ol.proj.transform([ -74.04455, 40.6893 ], 'EPSG:4326','EPSG:900913');
 		
 		var GoogleSource = new ol.source.OSM({
 			url: 'http://mt{0-3}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
@@ -119,7 +119,7 @@ var MapApi = {
 			}).extend([ mousePositionControl ]),
 			layers : [ google_layer ],
 			view : new ol.View({
-				projection : 'EPSG:3857',
+				projection : 'EPSG:900913',
 				center : center,
 				zoom : 12
 			})
