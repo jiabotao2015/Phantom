@@ -1,10 +1,55 @@
 /**
- *
+ * 
  */
 var center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326',
 		'EPSG:3857');
 
 var map;
+
+/**
+ * Currently drawn feature.
+ * 
+ * @type {ol.Feature}
+ */
+var sketch;
+var draw; // global so we can remove it later
+/**
+ * The help tooltip element.
+ * 
+ * @type {Element}
+ */
+var helpTooltipElement;
+
+
+/**
+ * Overlay to show the help messages.
+ * 
+ * @type {ol.Overlay}
+ */
+var helpTooltip;
+
+
+/**
+ * The measure tooltip element.
+ * 
+ * @type {Element}
+ */
+var measureTooltipElement;
+
+
+/**
+ * Overlay to show the measurement.
+ * 
+ * @type {ol.Overlay}
+ */
+var measureTooltip;
+
+/**
+ * wgs84计算参数 6378137是地球半径，表问我为什么，问地质局
+ * 
+ * @type 类型？I do not know, nor I care.不知道的类型多了去了
+ */
+var wgs84Sphere = new ol.Sphere(6378137);
 
 var MapApi = {
 
@@ -168,7 +213,6 @@ var MapApi = {
 	'removeControl' : function() {
 	},
 	'drawPoint' : function(layer) {
-
 		var interactions = map.getInteractions();
 		var interactions_arr = interactions.getArray();
 		for (var i = 0; i < interactions_arr.length; i++) {
@@ -177,7 +221,7 @@ var MapApi = {
 				map.removeInteraction(tmp_interaction);
 			}
 		}
-		var draw; // global so we can remove it later
+		// var draw; // global so we can remove it later
 		var source = layer.getSource();
 		draw = new ol.interaction.Draw({
 			source : source,
@@ -198,7 +242,7 @@ var MapApi = {
 					features_arr, null, null,{
 						srsName : 'EPSG:3857',
 						featureNS : 'http://localhost:8888/Phantom/',
-						//featurePrefix:'Phantom',
+						// featurePrefix:'Phantom',
 						featureType:'Phantom:tb_city'
 					}
 			);
@@ -220,7 +264,7 @@ var MapApi = {
 		var vector = new ol.layer.Vector({
 			source : source
 		});
-		var draw; // global so we can remove it later
+		// var draw; // global so we can remove it later
 		draw = new ol.interaction.Draw({
 			source : source,
 			type : "Polygon"
@@ -230,7 +274,7 @@ var MapApi = {
 		map.addInteraction(draw);
 	},
 	'drawCircle' : function(layer) {
-		var draw; // global so we can remove it later
+		// var draw; // global so we can remove it later
 		var source = layer.getSource();
 		draw = new ol.interaction.Draw({
 			name : "draw",
@@ -240,8 +284,253 @@ var MapApi = {
 		map.addInteraction(draw);
 	},
 	'viewTrack': function(points) {
-		//第一步把点变成mutiline,在line层展现
-		//第二步在point层做点的轨迹运动
+		// 第一步把点变成mutiline,在line层展现
+		// 第二步在point层做点的轨迹运动
+	},
+	'startMeasureLine':function(){
+		map.removeInteraction(draw);
+		map.on('pointermove', pointerMoveHandler);
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+		var vector = new ol.layer.Vector({
+			source : source
+		});
+		// var draw; // global so we can remove it later
+		draw = new ol.interaction.Draw({
+			source : source,
+			type : "LineString"
+		});
+		draw.set("name", "draw", true);
+		map.addLayer(vector);
+		map.addInteraction(draw);
+		
+		createMeasureTooltip();
+        createHelpTooltip();
+		
+		draw.on('drawstart',
+	            function(evt) {
+	              // set sketch
+	              sketch = evt.feature;
+	              var tooltipCoord = evt.coordinate;
+	              listener = sketch.getGeometry().on('change', function(evt) {
+	                var geom = evt.target;
+	                var output = formatLength(geom);
+	                tooltipCoord = geom.getLastCoordinate();
+	                console.log(tooltipCoord);
+	                var firstCoord = geom.getFirstCoordinate();
+	                console.log(firstCoord);
+	                measureTooltipElement.innerHTML = output;
+	                console.log(output);
+	                measureTooltip.setPosition(tooltipCoord);
+	              });
+	            }, this);
+		
+		draw.on('drawend',
+	            function() {
+	              measureTooltipElement.className = 'tooltip tooltip-static';
+	              measureTooltip.setOffset([0, -7]);
+	              // unset sketch
+	              sketch = null;
+	              // unset tooltip so that a new one can be created
+	              measureTooltipElement = null;
+	              createMeasureTooltip();
+	              ol.Observable.unByKey(listener);
+	            }, this);
+		
+	},
+	'startMeasureArea':function(){
+		map.removeInteraction(draw);
+		map.on('pointermove', pointerMoveHandler);
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+		var vector = new ol.layer.Vector({
+			source : source,
+			style: new ol.style.Style({
+		          fill: new ol.style.Fill({
+		            color: 'rgba(255, 255, 255, 0.6)'
+		          }),
+		          stroke: new ol.style.Stroke({
+		            color: '#ffcc33',
+		            width: 2
+		          }),
+		          image: new ol.style.Circle({
+		            radius: 7,
+		            fill: new ol.style.Fill({
+		              color: '#ffcc33'
+		            })
+		          })
+		        })
+		});
+		// var draw; // global so we can remove it later
+		 draw = new ol.interaction.Draw({
+			 source: source,
+			 type: "Polygon",
+			 style: new ol.style.Style({
+	            fill: new ol.style.Fill({
+	              color: 'rgba(255, 255, 255, 0.2)'
+	            }),
+	            stroke: new ol.style.Stroke({
+	              color: 'rgba(0, 0, 0, 0.5)',
+	              lineDash: [10, 10],
+	              width: 2
+	            }),
+	            image: new ol.style.Circle({
+	              radius: 5,
+	              stroke: new ol.style.Stroke({
+	                color: 'rgba(0, 0, 0, 0.7)'
+	              }),
+	              fill: new ol.style.Fill({
+	                color: 'rgba(255, 255, 255, 0.2)'
+	              })
+	            })
+	          })
+		 });
+		draw.set("name", "draw", true);
+		map.addLayer(vector);
+		map.addInteraction(draw);
+		
+		createMeasureTooltip();
+        createHelpTooltip();
+		
+		draw.on('drawstart',
+				function(evt){
+			sketch = evt.feature;
+			listener = sketch.getGeometry().on('change', function(evt) {
+                var geom = evt.target;
+                var output = formatArea(geom);
+                var tooltipCoord = geom.getInteriorPoint().getCoordinates();
+                console.info(output);
+                measureTooltipElement.innerHTML = output;
+                measureTooltip.setPosition(tooltipCoord);
+              });
+		},this);
+		
+		draw.on('drawend',
+	            function() {
+	              measureTooltipElement.className = 'tooltip tooltip-static';
+	              measureTooltip.setOffset([0, -7]);
+	              // unset sketch
+	              sketch = null;
+	              // unset tooltip so that a new one can be created
+	              measureTooltipElement = null;
+	              createMeasureTooltip();
+	              ol.Observable.unByKey(listener);
+	            }, this);
+	},
+	'stopDraw':function(){
+		map.removeInteraction(draw);
+		map.un('pointermove', pointerMoveHandler);
+		measureTooltipElement = null;
+		helpTooltipElement = null;
+		map.removeOverlay(helpTooltip);
 	}
 
 }
+
+/**
+ * 参数为LineString的geometry
+ * 
+ */
+var formatLength = function(line) {
+	var length = 0;
+	var coordinates = line.getCoordinates();
+	var sourceProj = map.getView().getProjection();
+	for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
+        var c1 = ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
+        var c2 = ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
+        length += wgs84Sphere.haversineDistance(c1, c2);
+      }
+	// 取整数
+	var output;
+    if (length > 1000) {
+      output = (Math.round(length / 1000 * 100) / 100) +
+          ' ' + 'km';
+    } else {
+      output = (Math.round(length * 100) / 100) +
+          ' ' + 'm';
+    }
+    return output;
+    };
+
+/**
+ * 侧面积工具
+ */
+var formatArea = function(polygon) {
+    var area;
+    var sourceProj = map.getView().getProjection();
+    var geom = /** @type {ol.geom.Polygon} */(polygon.clone().transform(
+        sourceProj, 'EPSG:4326'));
+    var coordinates = geom.getLinearRing(0).getCoordinates();
+    area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
+    
+    var output;
+    if (area > 10000) {
+      output = (Math.round(area / 1000000 * 100) / 100) +
+          ' ' + 'km<sup>2</sup>';
+    } else {
+      output = (Math.round(area * 100) / 100) +
+          ' ' + 'm<sup>2</sup>';
+    }
+    return output;
+  };
+
+
+/**
+ * Creates a new help tooltip
+ */
+function createHelpTooltip() {
+  if (helpTooltipElement) {
+    helpTooltipElement.parentNode.removeChild(helpTooltipElement);
+  }
+  helpTooltipElement = document.createElement('div');
+  helpTooltipElement.className = 'tooltip hidden';
+  helpTooltip = new ol.Overlay({
+    element: helpTooltipElement,
+    offset: [15, 0],
+    positioning: 'center-left'
+  });
+  map.addOverlay(helpTooltip);
+}
+
+
+/**
+ * Creates a new measure tooltip
+ */
+function createMeasureTooltip() {
+  if (measureTooltipElement) {
+    measureTooltipElement.parentNode.removeChild(measureTooltipElement);
+  }
+  measureTooltipElement = document.createElement('div');
+  measureTooltipElement.className = 'tooltip tooltip-measure';
+  measureTooltip = new ol.Overlay({
+    element: measureTooltipElement,
+    offset: [0, -15],
+    positioning: 'bottom-center'
+  });
+  map.addOverlay(measureTooltip);
+}
+
+var pointerMoveHandler = function(evt) {
+    if (evt.dragging) {
+      return;
+    }
+    var helpMsg = 'Click to start drawing';
+    var continuePolygonMsg = 'Click to continue drawing the polygon';
+    var continueLineMsg = 'Click to continue drawing the line';
+
+    if (sketch) {
+      var geom = (sketch.getGeometry());
+      if (geom instanceof ol.geom.Polygon) {
+        helpMsg = continuePolygonMsg;
+      } else if (geom instanceof ol.geom.LineString) {
+        helpMsg = continueLineMsg;
+      }
+    }
+   // console.info(helpMsg);
+    //console.info(evt.coordinate);
+    helpTooltipElement.innerHTML = helpMsg;
+    helpTooltip.setPosition(evt.coordinate);
+    helpTooltipElement.classList.remove('hidden');
+  };

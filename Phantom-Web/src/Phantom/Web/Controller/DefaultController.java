@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
 
+import Phantom.Web.Gis.Entity.CityPoint;
 //import Phantom.Web.Gis.Entity.CityPoint;
 import Phantom.Web.Gis.Service.CityPintService;
 import Phantom.Web.Model.User;
@@ -59,7 +62,9 @@ public class DefaultController {
 		List<User> loginuser = userService.Login(Email, password);
 		if(loginuser.size()>0){
 			session.setAttribute("user", loginuser.get(0));
-			//CityPoint cp = pointService.getCity(9);
+			CityPoint cp = pointService.getCity(9);
+			Geometry geom = cp.getShape();
+			Coordinate coord = geom.getCoordinate();
 			//System.out.println(cp.getCityName());
 			return new ModelAndView("redirect:/MainMap");
 		}
