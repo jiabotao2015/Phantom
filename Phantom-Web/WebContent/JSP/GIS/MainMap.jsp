@@ -24,7 +24,7 @@
 <title>MainMap</title>
 </head>
 <body>
-	<div id="map" class="map"></div>
+	<div id="map" class="map" style="height:980px"></div>
 	<div class="btn-group ToolBar" role="group">
 		<button id="btn_draw_point" type="button" class="btn btn-default">画点</button>
 		<button id="btn_draw_line" type="button" class="btn btn-default">画线</button>

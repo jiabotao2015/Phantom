@@ -66,7 +66,7 @@ public class DefaultController {
 			Geometry geom = cp.getShape();
 			Coordinate coord = geom.getCoordinate();
 			//System.out.println(cp.getCityName());
-			return new ModelAndView("redirect:/MainMap");
+			return new ModelAndView("redirect:MainPage");
 		}
 		pointService.toString();
 		return new ModelAndView("redirect:/Login");
@@ -79,6 +79,11 @@ public class DefaultController {
 	@RequestMapping(value = "/Home")
 	public String Home() {
 		return "Home";
+	}
+	
+	@RequestMapping(value = "/MainPage")
+	public String MainPage() {
+		return "MainPage";
 	}
 
 	/**

@@ -1,32 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="jQuery/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="BootStrap/css/bootstrap.min.css" />
-<link rel="shortcut icon" href="Icons/favicon.ico" />
-<script src="BootStrap/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="http://webapi.amap.com/maps?v=1.3&key=69530ee21ebcfaa0471ed23a15ba62f7"></script>
-<style type="text/css">
-body, html, #container {
-	height: 100%;
-	margin: 0px;
-}
-</style>
-<link href="http://openlayers.org/en/master/css/ol.css" rel="stylesheet"/>
-<script src="http://openlayers.org/en/master/build/ol.js"></script>
 <title>Phantom Home</title>
+<link rel="stylesheet" type="text/css" href="./OpenLayers/V4/ol.css" />
+<link rel="stylesheet" type="text/css" href="AppCSS/Home.css" />
+<script src="./OpenLayers/V4/ol-debug.js"></script>
+
 </head>
 <body>
-	<div id="map"></div>
+	<div class="container-fluid" style="height:100%">
+		<div class="row" style="height:10.9%">
+			<div class="col-md-12">
+				<jsp:include page="./Templet/head.jsp"/>
+			</div>
+		</div>
+		<div class="row" style="height:89%">
+			<div class="col-md-2" style="width:12%;padding-right: 0px;padding-left: 0px;"></div>
+			<div class="col-md-10" style="width:88%;padding-right: 0px;padding-left: 0px;">
+				<div id="map" class="map"></div>
+			</div>
+		</div>
+	</div>
 </body>
-<script type="text/javascript">
-	var map = new AMap.Map('container');
-	map.setZoom(10);
-	map.setCenter([ 116.39, 39.9 ]);
+<script src="./AppJS/GIS/MapAll.js"></script>
+<script>
+	MapApi.init();
 </script>
 </html>
