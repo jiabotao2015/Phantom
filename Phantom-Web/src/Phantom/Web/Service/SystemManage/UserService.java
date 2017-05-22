@@ -25,8 +25,8 @@ public class UserService {
 		return userDao.findOne(userid);
 	}
 	
-	public List<User> Login(String username,String password){
-		List<User> users = userDao.Login(username,password);
+	public User Login(String username,String password){
+		User users = userDao.Login(username,password);
 		return users;
 	}
 

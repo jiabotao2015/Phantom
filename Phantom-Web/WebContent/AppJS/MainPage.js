@@ -31,4 +31,10 @@ $(document).ready(function() {
 	$("#btn_stop_draw").click(function() {
 		MapApi.stopDraw();
 	});
+	$("#btn_start_websocket").click(function() {
+		$.ajax({
+			type : 'POST',
+			url : './startWebsocket'
+		});
+	});
 });

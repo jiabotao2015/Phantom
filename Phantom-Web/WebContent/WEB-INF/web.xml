@@ -56,6 +56,7 @@
 			<param-value>classpath:config/spring/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -71,6 +72,8 @@
    		<servlet-name>cxf</servlet-name>
    		<url-pattern>/ws/*</url-pattern>
   	</servlet-mapping>
+  	
+  	
 
 	<!-- 为了能够处理中文的post请求，再配置一个encodingFilter，以避免post请求中文出现乱码情况  感觉这个可以不要-->
 	<filter>

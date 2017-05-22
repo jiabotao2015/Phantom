@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
@@ -25,6 +26,7 @@ import Phantom.Web.Gis.Entity.CityPoint;
 import Phantom.Web.Gis.Service.CityPintService;
 import Phantom.Web.Model.User;
 import Phantom.Web.Service.SystemManage.UserService;
+import Phantom.Web.WebSocket.DemoWebSocketHandler;
 
 
 @Controller
@@ -59,9 +61,9 @@ public class DefaultController {
 	public ModelAndView LoginAction(String Email, String password, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		List<User> loginuser = userService.Login(Email, password);
-		if(loginuser.size()>0){
-			session.setAttribute("user", loginuser.get(0));
+		User loginuser = userService.Login(Email, password);
+		if(loginuser!=null){
+			session.setAttribute("user", loginuser);
 			CityPoint cp = pointService.getCity(9);
 			Geometry geom = cp.getShape();
 			Coordinate coord = geom.getCoordinate();
@@ -107,6 +109,14 @@ public class DefaultController {
 		ImageIO.write(bi, "jpg", out);
 		out.flush();
 		out.close();
+	}
+	
+	@RequestMapping("/startWebsocket")
+	public @ResponseBody String startWebsocket(HttpServletRequest request){
+		HttpSession httpSession = request.getSession();
+		User loginUser = (User)httpSession.getAttribute("user");
+		DemoWebSocketHandler.sendMessage(loginUser, "hello");
+		return "OK";
 	}
 
 }
