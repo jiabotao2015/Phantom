@@ -3,9 +3,10 @@
  */
 $(document).ready(function() {
 	MapApi.init();
-	
+	console.log("init center and zoom");
 	$("#btn_get_beijng").click(function() {
 		MapApi.CenterAndZoom(116.397428, 39.90923, 11);
+		
 	});
 	$("#btn_show_point").click(function() {
 		MapApi.addLayer(citypoint_vector_layer);
@@ -36,5 +37,11 @@ $(document).ready(function() {
 			type : 'POST',
 			url : './startWebsocket'
 		});
+	});
+	$("#btn_fly_to_beijng").click(function() {
+		MapApi.flyToLocation(116.397428, 39.70923);
+	});
+	$("#btn_dynamic").click(function() {
+		MapApi.dynamicFeature();
 	});
 });

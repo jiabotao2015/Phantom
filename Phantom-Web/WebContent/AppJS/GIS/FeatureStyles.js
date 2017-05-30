@@ -16,23 +16,16 @@ var FeatureStyles = {
 	 */
 	'point' : new ol.style.Style({
 		image : new ol.style.Circle({
-			radius : 7,
+			radius : 14,
 			snapToPixel : false,
 			fill : new ol.style.Fill({
-				color : 'black'
+				color : 'yellow'
 			}),
 			stroke : new ol.style.Stroke({
-				color : 'white',
-				width : 2
+				color : 'red',
+				width : 7
 			})
 		})
-	}),
-	/**
-	 * 出租车样式
-	 */
-	'Texi':new ol.style.Style({
-		
 	})
 	
-
 }

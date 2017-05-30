@@ -21,7 +21,8 @@ var pointStyle = new ol.style.Style({
 var citypoint_vector_layer = new ol.layer.Vector({
 	name:"citypoint_vector_layer",
 	source : citypoint_vector_source,
-	style : pointStyle
+	//style : pointStyle
+	style:FeatureStyles.point
 });
 
 var featureRequest = new ol.format.WFS().writeGetFeature({
@@ -39,5 +40,5 @@ fetch('http://localhost:8888/geoserver/Phantom/ows', {
 	return response.json();
 }).then(function(json) {
 	var features = new ol.format.GeoJSON().readFeatures(json);
-	citypoint_vector_source.addFeatures(features);
+	//citypoint_vector_source.addFeatures(features);
 });

@@ -1,8 +1,9 @@
 /**
  * 
  */
-var center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326',
-		'EPSG:3857');
+var center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326', 'EPSG:3857');
+
+var coordinates = new Array();
 
 var map;
 
@@ -174,9 +175,12 @@ var MapApi = {
 
 	'CenterAndZoom' : function(Lng, lat, zoom) {
 		var center = ol.proj.transform([ Lng, lat ], 'EPSG:4326', 'EPSG:3857');
-		var view = map.getView();
+		var view = new ol.View({
+			projection : 'EPSG:3857',
+			center : center,
+			zoom : zoom});
 		view.setCenter(center);
-		view.setZoom(zoom);
+		// view.setZoom(zoom);
 		map.setView(view);
 	},
 
@@ -421,10 +425,52 @@ var MapApi = {
 	},
 	'stopDraw':function(){
 		map.removeInteraction(draw);
+		// Unlisten for a certain type of event.
 		map.un('pointermove', pointerMoveHandler);
 		measureTooltipElement = null;
 		helpTooltipElement = null;
 		map.removeOverlay(helpTooltip);
+	},
+	'flyToLocation':function(Lng, lat){
+		var view = map.getView();
+		// The duration of the animation in milliseconds (defaults to 1000).
+		var duration = 2000;
+		var zoom = view.getZoom();
+		var center = ol.proj.transform([ Lng, lat ], 'EPSG:4326', 'EPSG:3857');
+		view.animate({
+			center: center,
+	        duration: duration,
+	        easing: elastic
+		});
+	},
+	'dynamicFeature':function(){
+		map.addLayer(citypoint_vector_layer);
+		map.getView().setCenter(center);
+		var coordinates = [];
+		var coordinate;
+		var Lon = 114.433909;
+		var Lat = 30.498707;
+		for(var i=0;i<100000;i++){
+			Lon = Lon+0.00001;
+			coordinate = ol.proj.transform([ Lon, Lat ], 'EPSG:4326', 'EPSG:3857');
+			coordinates.push(coordinate);
+		}
+		var speed = 600;
+		var now = new Date().getTime();
+        map.on('postcompose', function(event){
+        	var frameState = event.frameState;
+        	var elapsedTime = frameState.time - now;
+        	var vectorContext = event.vectorContext;
+        	var index = Math.round(speed * elapsedTime / 1000);
+        	if(index<100000&&index>0){
+        		var currentPoint = new ol.geom.Point(coordinates[index]);
+        		var feature = new ol.Feature(currentPoint);
+        		vectorContext.drawFeature(feature, FeatureStyles.point);
+        	}
+        	map.render();
+        });
+		//map.on('postcompose',moveFeature);
+        map.render();
 	}
 
 }
@@ -528,9 +574,19 @@ var pointerMoveHandler = function(evt) {
         helpMsg = continueLineMsg;
       }
     }
-   // console.info(helpMsg);
-    //console.info(evt.coordinate);
+    // console.info(helpMsg);
+    // console.info(evt.coordinate);
     helpTooltipElement.innerHTML = helpMsg;
     helpTooltip.setPosition(evt.coordinate);
     helpTooltipElement.classList.remove('hidden');
   };
+  
+  //An elastic easing method (from https://github.com/DmitryBaranovskiy/raphael).
+  var elastic =  function elastic(t) {
+	var value = Math.pow(2, -10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
+	return 1.1;
+  }
+  
+ function moveFeature(event){
+ }
+  

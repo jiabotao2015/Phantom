@@ -15,6 +15,8 @@
 <script src="./OpenLayers/V4/ol-debug.js"></script>
 <link rel="stylesheet" type="text/css" href="AppCSS/MainPage.css" />
 <script src="Resources/CommonJSLib/sockjs.min.js"></script>
+<script src="Resources/CommonJSLib/sockjs.min.js"></script>
+<script src="./AppJS/GIS/FeatureStyles.js"></script>
 </head>
 <body>
 	<div id="rootdiv" class="container-fluid">
@@ -38,6 +40,8 @@
 							<button id="btn_get_beijng" type="button" class="btn btn-default">定位到北京</button>
 							<button id="btn_stop_draw" type="button" class="btn btn-default">停止绘制</button>
 							<button id="btn_start_websocket" type="button" class="btn btn-default">websocket</button>
+							<button id="btn_fly_to_beijng" type="button" class="btn btn-default">飞到北京</button>
+							<button id="btn_dynamic" type="button" class="btn btn-default">动画</button>
 						</div>
 						<div id="mouse-position" class="MousePosition"></div>
 					</div>
