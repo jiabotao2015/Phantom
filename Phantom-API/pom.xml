@@ -19,9 +19,15 @@
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
 		</dependency>
+		<!-- <dependency> <groupId>org.opengis</groupId> <artifactId>geoapi</artifactId> 
+			</dependency> -->
 		<dependency>
-			    <groupId>org.opengis</groupId>
-			    <artifactId>geoapi</artifactId>
+			<groupId>com.spatial4j</groupId>
+			<artifactId>spatial4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osgeo</groupId>
+			<artifactId>proj4j</artifactId>
 		</dependency>
 	</dependencies>
 </project>

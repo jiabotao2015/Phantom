@@ -9,6 +9,8 @@
 		<Encoding>UTF-8</Encoding>
 		<java_source_version>1.8</java_source_version>
 		<java_target_version>1.8</java_target_version>
+		<Spring_Version>4.3.6.RELEASE</Spring_Version>
+		<Hibernate_Version>5.2.6.Final</Hibernate_Version>
 		<redis.clients.version>2.9.0</redis.clients.version>
 		<maven.test.skip>true</maven.test.skip>
 		<maven.jdoc.skip>true</maven.jdoc.skip>
@@ -40,22 +42,22 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
-				<version>4.3.6.RELEASE</version>
+				<version>${Spring_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-websocket</artifactId>
-				<version>4.3.6.RELEASE</version>
+				<version>${Spring_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-messaging</artifactId>
-				<version>4.3.6.RELEASE</version>
+				<version>${Spring_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-tx</artifactId>
-				<version>4.3.6.RELEASE</version>
+				<version>${Spring_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.data</groupId>
@@ -93,7 +95,6 @@
 				<artifactId>jedis</artifactId>
 				<version>${redis.clients.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
@@ -137,22 +138,17 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>5.2.6.Final</version>
+				<version>${Hibernate_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
-				<version>5.2.6.Final</version>
+				<version>${Hibernate_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-spatial</artifactId>
-				<version>5.2.6.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vividsolutions</groupId>
-				<artifactId>jts</artifactId>
-				<version>1.13</version>
+				<version>${Hibernate_Version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate.javax.persistence</groupId>
@@ -160,9 +156,24 @@
 				<version>1.0.0.Final</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.opengis</groupId>
-			    <artifactId>geoapi</artifactId>
-			    <version>3.0.0</version>
+				<groupId>com.vividsolutions</groupId>
+				<artifactId>jts</artifactId>
+				<version>1.13</version>
+			</dependency>
+			<dependency>
+				<groupId>com.spatial4j</groupId>
+				<artifactId>spatial4j</artifactId>
+				<version>0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgeo</groupId>
+				<artifactId>proj4j</artifactId>
+				<version>0.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opengis</groupId>
+				<artifactId>geoapi</artifactId>
+				<version>3.0.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
