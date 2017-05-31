@@ -20,8 +20,8 @@ public class SpatialUtil {
 	private static CRSFactory crsFactory = new CRSFactory();
 	private static CoordinateTransformFactory ctFactory = new CoordinateTransformFactory();
 	private static CoordinateReferenceSystem WGS84 = crsFactory.createFromName("EPSG:4326");
-	private static CoordinateReferenceSystem WebMercator = crsFactory.createFromName("EPSG:3857");
-	private static CoordinateTransform WGS84ToWebMercator = ctFactory.createTransform(WGS84, WebMercator);
+	private static CoordinateReferenceSystem GaodeMercator = crsFactory.createFromName("EPSG:3857");
+	private static CoordinateTransform WGS84ToGaodeMercator = ctFactory.createTransform(WGS84, GaodeMercator);
 	private static GeometryFactory geometryFactory = new GeometryFactory();
 	private static final int EARTH_RADIUS = 6378137;
 	
@@ -97,8 +97,10 @@ public class SpatialUtil {
 		return (double) Math.round(distance * 100) / 100;
 	}
 
-	public  static ProjCoordinate transform(ProjCoordinate coordA, ProjCoordinate coordB) {
-		return WGS84ToWebMercator.transform(coordA, coordB);
+	public static ProjCoordinate WGS84CoordToGaodeCoord(ProjCoordinate coordA) {
+		ProjCoordinate coordB = new ProjCoordinate();
+		 WGS84ToGaodeMercator.transform(coordA, coordB);
+		 return coordB;
 	}
 	
 	private static double toRadians(double angleInDegrees) {
