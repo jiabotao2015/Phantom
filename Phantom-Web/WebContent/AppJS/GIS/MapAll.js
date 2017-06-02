@@ -276,6 +276,21 @@ var MapApi = {
 		draw.set("name", "draw", true);
 		map.addLayer(vector);
 		map.addInteraction(draw);
+		
+		draw.on('drawend', function(evt) {
+			var feature = evt.feature;
+			var wktwriter = new ol.format.WKT();
+			var opentions = {
+					dataProjection: 'EPSG:4326',
+					featureProjection: 'EPSG:3857',
+					rightHanded:true,
+					decimals:6
+			};
+			var featurewkt = wktwriter.writeFeature(feature);
+			var featurewkt2 = wktwriter.writeFeature(feature,opentions);
+			console.log(featurewkt);
+			console.log(featurewkt2);
+		});
 	},
 	'drawCircle' : function(layer) {
 		// var draw; // global so we can remove it later
