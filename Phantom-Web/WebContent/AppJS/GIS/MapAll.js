@@ -288,6 +288,15 @@ var MapApi = {
 			};
 			var featurewkt = wktwriter.writeFeature(feature);
 			var featurewkt2 = wktwriter.writeFeature(feature,opentions);
+			$.ajax({
+				type:"GET",
+				url:"./FeatureController/getPolygonArea",
+				data:{wkt:featurewkt2},
+				dataType: "text",
+				success:function(data){
+					console.log(data);
+				}
+			});
 			console.log(featurewkt);
 			console.log(featurewkt2);
 		});
@@ -346,7 +355,22 @@ var MapApi = {
 	            }, this);
 		
 		draw.on('drawend',
-	            function() {
+	            function(evt) {
+			
+				  var feature = evt.feature;
+				  var wktwriter = new ol.format.WKT();
+				  var featurewkt = wktwriter.writeFeature(feature);
+					$.ajax({
+						type:"GET",
+						url:"./FeatureController/getLineLength",
+						data:{wkt:featurewkt},
+						dataType: "text",
+						success:function(data){
+							console.log(data);
+						}
+					});
+				  console.log(featurewkt);
+				  
 	              measureTooltipElement.className = 'tooltip tooltip-static';
 	              measureTooltip.setOffset([0, -7]);
 	              // unset sketch
@@ -599,7 +623,7 @@ var pointerMoveHandler = function(evt) {
   //An elastic easing method (from https://github.com/DmitryBaranovskiy/raphael).
   var elastic =  function elastic(t) {
 	var value = Math.pow(2, -10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
-	return 1.1;
+	return value;
   }
   
  function moveFeature(event){

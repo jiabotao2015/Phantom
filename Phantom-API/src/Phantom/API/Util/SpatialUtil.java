@@ -16,7 +16,7 @@ import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
 public class SpatialUtil {
-	
+
 	private static CRSFactory crsFactory = new CRSFactory();
 	private static CoordinateTransformFactory ctFactory = new CoordinateTransformFactory();
 	private static CoordinateReferenceSystem WGS84 = crsFactory.createFromName("EPSG:4326");
@@ -24,9 +24,10 @@ public class SpatialUtil {
 	private static CoordinateTransform WGS84ToGaodeMercator = ctFactory.createTransform(WGS84, GaodeMercator);
 	private static GeometryFactory geometryFactory = new GeometryFactory();
 	private static final int EARTH_RADIUS = 6378137;
-	
+
 	/**
 	 * 无论什么坐标系都能用此方法创造点
+	 * 
 	 * @param lon
 	 * @param lat
 	 * @return
@@ -36,9 +37,10 @@ public class SpatialUtil {
 		Point point = geometryFactory.createPoint(coord);
 		return point;
 	}
-	
+
 	/**
 	 * Well-Know-Text 字符串创建geom对象，任何geom对象
+	 * 
 	 * @param wkt
 	 * @return
 	 */
@@ -52,9 +54,10 @@ public class SpatialUtil {
 		}
 		return geom;
 	}
-	
+
 	/**
 	 * 通过经纬度半径创建圆形，实心圆
+	 * 
 	 * @param lat
 	 * @param lon
 	 * @param radius
@@ -62,7 +65,7 @@ public class SpatialUtil {
 	 */
 	public static Polygon createCircle(double lat, double lon, double radius) {
 		int sides = 36;// 圆上点个数；
-		//GeometryFactory geometryFactory = new GeometryFactory();
+		// GeometryFactory geometryFactory = new GeometryFactory();
 		Coordinate coords[] = new Coordinate[sides + 1];
 		for (int i = 0; i < sides; i++) {
 			double angle = ((double) i / (double) sides) * Math.PI * 2.0;
@@ -70,14 +73,15 @@ public class SpatialUtil {
 			double dy = Math.sin(angle) * radius;
 			coords[i] = new Coordinate((double) lat + dx, (double) lon + dy);
 		}
-		coords[sides] = coords[0];//首尾相连的coord 组层一个环形
+		coords[sides] = coords[0];// 首尾相连的coord 组层一个环形
 		LinearRing ring = geometryFactory.createLinearRing(coords);
-		Polygon circle = geometryFactory.createPolygon(ring, null);//后面的参数代表挖空，我的天，好高大上的参数
+		Polygon circle = geometryFactory.createPolygon(ring, null);// 后面的参数代表挖空，我的天，好高大上的参数
 		return circle;
 	}
-	
+
 	/**
 	 * WGS84坐标系计算两点之间距离
+	 * 
 	 * @param pointA
 	 * @param pointB
 	 * @return
@@ -97,12 +101,27 @@ public class SpatialUtil {
 		return (double) Math.round(distance * 100) / 100;
 	}
 
+	public static double getArea(Geometry geom) {
+		Coordinate[] coordinates = geom.getCoordinates();
+		double area = 0;
+		int len = coordinates.length;
+		double x1 = coordinates[len - 1].x;
+		double y1 = coordinates[len - 1].y;
+		for (int i = 0; i < len; i++) {
+			double x2 = coordinates[i].x, y2 = coordinates[i].y;
+			area += toRadians(x2 - x1) * (2 + Math.sin(toRadians(y1)) + Math.sin(toRadians(y2)));
+			x1 = x2;
+			y1 = y2;
+		}
+		return area * EARTH_RADIUS * EARTH_RADIUS / 2.0;
+	}
+
 	public static ProjCoordinate WGS84CoordToGaodeCoord(ProjCoordinate coordA) {
 		ProjCoordinate coordB = new ProjCoordinate();
-		 WGS84ToGaodeMercator.transform(coordA, coordB);
-		 return coordB;
+		WGS84ToGaodeMercator.transform(coordA, coordB);
+		return coordB;
 	}
-	
+
 	private static double toRadians(double angleInDegrees) {
 		return angleInDegrees * Math.PI / 180;
 	}
