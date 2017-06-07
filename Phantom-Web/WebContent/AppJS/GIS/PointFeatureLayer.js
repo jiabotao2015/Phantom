@@ -40,5 +40,5 @@ fetch('http://localhost:8888/geoserver/Phantom/ows', {
 	return response.json();
 }).then(function(json) {
 	var features = new ol.format.GeoJSON().readFeatures(json);
-	//citypoint_vector_source.addFeatures(features);
+	citypoint_vector_source.addFeatures(features);
 });

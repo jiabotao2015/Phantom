@@ -39,7 +39,7 @@ $(document).ready(function() {
 		});
 	});
 	$("#btn_fly_to_beijng").click(function() {
-		MapApi.flyToLocation(116.397428, 39.70923);
+		MapApi.flyToLocation(120.140633, 30.268955);
 	});
 	$("#btn_dynamic").click(function() {
 		MapApi.dynamicFeature();
