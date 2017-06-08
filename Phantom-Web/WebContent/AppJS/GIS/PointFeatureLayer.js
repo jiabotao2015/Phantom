@@ -25,6 +25,8 @@ var citypoint_vector_layer = new ol.layer.Vector({
 	style:FeatureStyles.point
 });
 
+
+
 var featureRequest = new ol.format.WFS().writeGetFeature({
 	srsName : 'EPSG:3857',
 	featureNS : 'http://localhost:8888/geoserver/Phantom/ows',
