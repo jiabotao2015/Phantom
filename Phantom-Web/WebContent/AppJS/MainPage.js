@@ -66,4 +66,22 @@ $(document).ready(function() {
 	$("#btn_dynamic").click(function() {
 		MapApi.dynamicFeature();
 	});
+	
+	var tmpview = map.getView();
+	 tmpview.on('change:resolution',CheckViewChange);
+	 var boolShowLayer = false;
+	  
+	 function CheckViewChange(){
+		 var currentZoom = tmpview.getZoom();
+		 
+		 if(boolShowLayer&&currentZoom<=10){//如果全局为显示，当前为不应该显示
+			 boolShowLayer = false
+			 console.log("hide");
+		 }
+		 if(!boolShowLayer&&currentZoom>10){
+			 boolShowLayer = true;
+			 console.log("show");
+		 }
+		 
+	 }
 });

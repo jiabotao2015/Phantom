@@ -80,11 +80,9 @@
 	</bean>
 
 	<bean name="RoadService" class="Phantom.PostGIS.Synchronization.Service.OSMRoadService">
-		<!-- <property name="road" value="1" /> -->
 	</bean>
 	
 	<bean name="GCJRoadService" class="Phantom.PostGIS.Synchronization.Service.GCJRoadService">
-		<!-- <property name="road" value="1" /> -->
 	</bean>
 
 

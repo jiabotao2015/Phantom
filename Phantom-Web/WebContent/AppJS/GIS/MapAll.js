@@ -175,10 +175,11 @@ var MapApi = {
 
 	'CenterAndZoom' : function(Lng, lat, zoom) {
 		var center = ol.proj.transform([ Lng, lat ], 'EPSG:4326', 'EPSG:3857');
-		var view = new ol.View({
-			projection : 'EPSG:3857',
-			center : center,
-			zoom : zoom});
+		var view = map.getView();
+		/*
+		 * var view = new ol.View({ projection : 'EPSG:3857', center : center,
+		 * zoom : zoom});
+		 */
 		view.setCenter(center);
 		// view.setZoom(zoom);
 		map.setView(view);
@@ -508,7 +509,7 @@ var MapApi = {
         	}
         	map.render();
         });
-		//map.on('postcompose',moveFeature);
+		// map.on('postcompose',moveFeature);
         map.render();
 	}
 
@@ -620,7 +621,8 @@ var pointerMoveHandler = function(evt) {
     helpTooltipElement.classList.remove('hidden');
   };
   
-  //An elastic easing method (from https://github.com/DmitryBaranovskiy/raphael).
+  // An elastic easing method (from
+	// https://github.com/DmitryBaranovskiy/raphael).
   var elastic =  function elastic(t) {
 	var value = Math.pow(2, -10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
 	return value;
@@ -628,4 +630,6 @@ var pointerMoveHandler = function(evt) {
   
  function moveFeature(event){
  }
+ 
+ 
   
