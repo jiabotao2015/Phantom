@@ -3,12 +3,8 @@ package Phantom.PostGIS.Synchronization;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -23,9 +19,10 @@ import Phantom.PostGIS.Synchronization.Service.OSMRoadService;
 
 public class SynchronizationStartUp {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		ApplicationContext context = new FileSystemXmlApplicationContext("src/config/SpringContext.xml");
+	/*	ApplicationContext context = new FileSystemXmlApplicationContext("src/config/SpringContext.xml");
 		OSMRoadService roadservice = (OSMRoadService) context.getBean("RoadService");
 		GCJRoadService new_road_service = (GCJRoadService)context.getBean("GCJRoadService");
 		List<OSMRoad> roads = roadservice.getAll();
@@ -85,6 +82,6 @@ public class SynchronizationStartUp {
 		}
 		
 
-	}
+	}*/
 
-}
+}}

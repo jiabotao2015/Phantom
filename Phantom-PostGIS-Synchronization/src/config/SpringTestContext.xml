@@ -11,6 +11,9 @@
 	  http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 	  http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
+	<context:annotation-config />
+	<context:component-scan base-package="Phantom.PostGIS.Synchronization"></context:component-scan>
+	
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
@@ -18,52 +21,7 @@
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
-	<bean id="PGPoolingDataSource" class="org.postgresql.ds.PGConnectionPoolDataSource">
-		<property name="serverName" value="localhost" />
-		<property name="databaseName" value="PhantomGIS" />
-		<property name="portNumber" value="5432" />
-		<property name="user" value="postgres" />
-		<property name="password" value="postgres" />
-	</bean>
-	<!-- <context:annotation-config /> -->
-	<!-- <context:component-scan base-package="Phantom.PostGIS.Synchronization">
-
-	</context:component-scan> -->
-	<!-- <bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreUnresolvablePlaceholders" value="true" />
-		<property name="locations">
-			<list>
-				<value>classpath:config/postgresql.properties</value>
-				<value>src/config/postgis.properties</value>
-			</list>
-		</property>
-	</bean>
-	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
-		destroy-method="close"> <property name="driverClass" value="org.postgresql.Driver" 
-		/> <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/Phantom" 
-		/> <property name="user" value="postgres" /> <property name="password" value="postgres" 
-		/> </bean>
-
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
-		<property name="dataSource" ref="DataSource" /> <property name="jpaVendorAdapter" 
-		ref="PostgreSQLAdapter" /> <property name="packagesToScan" value="Phantom.Web.Model" 
-		/>待扫描的实体类包，不再需要persistence.xml了 <property name="jpaProperties"> <props> <prop 
-		key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop> 
-		<prop key="hibernate.show_sql">true</prop> <prop key="hibernate.hbm2ddl.auto">update</prop> 
-		</props> </property> </bean>
-
-	指定实现JPA的适配器
-	<bean id="PostgreSQLAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
-		<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" 
-		/> </bean> 配置事务管理器 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 
-		<property name="entityManagerFactory" ref="entityManagerFactory"/> </bean> 
-		启用 annotation事务注解 <tx:annotation-driven transaction-manager="transactionManager"/> 
-		<jpa:repositories base-package="Phantom.Web.Dao" entity-manager-factory-ref="entityManagerFactory" 
-		transaction-manager-ref="transactionManager" />
-
 	
-
 	<bean id="GisEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="GisDataSource" />
@@ -86,28 +44,25 @@
 	<bean id="GisTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="GisEntityManagerFactory" />
 	</bean>
-
-	<bean name="RoadService"
-		class="Phantom.PostGIS.Synchronization.Service.OSMRoadService">
-	</bean>
-
-	<bean name="GCJRoadService"
-		class="Phantom.PostGIS.Synchronization.Service.GCJRoadService">
-	</bean>
-
-
+	
 	<tx:annotation-driven transaction-manager="GISTransactionManager" />
 
 	<jpa:repositories base-package="Phantom.PostGIS.Synchronization.Dao"
 		entity-manager-factory-ref="GisEntityManagerFactory"
-		transaction-manager-ref="GisTransactionManager" /> -->
-		
-		
-	<bean id="roadTask" class="Phantom.PostGIS.Synchronization.SynTask.RoadSynTask">
-		<property name="datasource" ref="PGPoolingDataSource"></property>
+		transaction-manager-ref="GisTransactionManager" />
+
+
+	<bean id="PGConnectionPoolDataSource" class="org.postgresql.ds.PGConnectionPoolDataSource">
+		<property name="serverName" value="localhost" />
+		<property name="databaseName" value="PhantomGIS" />
+		<property name="portNumber" value="5432" />
+		<property name="user" value="postgres" />
+		<property name="password" value="postgres" />
 	</bean>
 
-	<bean id="SpringQtzJob" class="Phantom.PostGIS.Synchronization.SynTask.SimpleTask" />
+	<bean id="SpringQtzJob" class="Phantom.PostGIS.Synchronization.SynTask.RoadSynTask">
+		<property name="pgpds" ref="PGConnectionPoolDataSource"/>
+	</bean>
 	<bean id="SpringQtzJobMethod"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
@@ -134,5 +89,4 @@
 			</list>
 		</property>
 	</bean>
-
 </beans>
