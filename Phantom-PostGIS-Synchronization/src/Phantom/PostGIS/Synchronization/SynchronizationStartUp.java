@@ -19,7 +19,7 @@ import Phantom.PostGIS.Synchronization.Service.OSMRoadService;
 
 public class SynchronizationStartUp {
 
-	@SuppressWarnings("resource")
+
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 	/*	ApplicationContext context = new FileSystemXmlApplicationContext("src/config/SpringContext.xml");

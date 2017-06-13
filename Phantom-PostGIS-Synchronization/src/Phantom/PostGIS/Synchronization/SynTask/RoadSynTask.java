@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//import org.jboss.logging.Logger;
 import org.postgresql.PGConnection;
 import org.postgresql.PGNotification;
 import org.postgresql.ds.PGConnectionPoolDataSource;
@@ -13,6 +14,8 @@ import Phantom.PostGIS.Synchronization.Service.OSMRoadService;
 
 public class RoadSynTask {
 
+	//private Logger logger = Logger.getLogger(RoadSynTask.class);
+	
 	private PGConnectionPoolDataSource pgpds;
 	
 	private PGConnection pgconn;
@@ -42,7 +45,8 @@ public class RoadSynTask {
 			PGNotification notifications[] = pgconn.getNotifications();
 			if (notifications != null) {
 				for (int i=0; i<notifications.length; i++) {
-					System.out.println("Got notification: " + notifications[i].getName());
+					
+					System.out.println("Got notification: " + notifications[i].getName()+notifications[i].getParameter());
 				}
 			}
 			
