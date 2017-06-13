@@ -64,7 +64,7 @@ public class RoadSynTask {
 		try {
 			conn = pgpds.getConnection();
 			Statement statement = conn.createStatement();
-			statement.execute("LISTEN VIRTUAL");
+			statement.execute("LISTEN mymessage");
 			statement.close();
 			this.pgconn = (PGConnection) conn;
 		} catch (SQLException e) {
