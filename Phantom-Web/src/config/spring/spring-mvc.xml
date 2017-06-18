@@ -40,14 +40,6 @@
 		<property name="prefix" value="/JSP/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-<!-- 
-	<bean id="websocket" class="Phantom.Web.WebSocket.WebsocketEndPoint" />
 
-	<websocket:handlers>
-		<websocket:mapping path="/websocket" handler="websocket" />
-		<websocket:handshake-interceptors>
-			<bean class="Phantom.Web.WebSocket.HandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-	</websocket:handlers> -->
 
 </beans>

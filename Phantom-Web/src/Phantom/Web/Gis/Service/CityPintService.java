@@ -21,5 +21,7 @@ public class CityPintService {
 		CityPoint cp = dao.findOne(cityid);
 		return cp;
 	}
+	
+	
 
 }

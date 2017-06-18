@@ -16,9 +16,10 @@
 		<param-value>
 			classpath:config/spring/applicationContext.xml,
 			classpath:config/spring/Spring-Common-Context.xml,
-			<!-- classpath:config/spring/Spring-JPA-Context.xml, -->
+			classpath:config/spring/Spring-JPA-Context.xml,
 			classpath:config/spring/Spring-GIS-Context.xml,
-			classpath:config/webservice/Spring-WebService-Context.xml
+			classpath:config/webservice/Spring-WebService-Context.xml,
+			classpath:config/spring/Spring-WebSocket-Context.xml
 		</param-value>
 	</context-param>
 	<listener>

@@ -1,11 +1,11 @@
 package Phantom.API;
 
-import com.vividsolutions.jts.geom.Coordinate;
+/*import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 
 import Phantom.API.Bean.LonLat;
 import Phantom.API.Util.LngLatUtil;
-import Phantom.API.Util.SpatialUtil;
+import Phantom.API.Util.SpatialUtil;*/
 
 public class Test {
 
@@ -54,9 +54,10 @@ public class Test {
 		if(a ==null){
 			System.out.println("1");
 		}
-		if(a.equals(null)){
+		// Exception
+		/*if(a.equals(null)){
 			System.out.println("0");
-		}
+		}*/
 		
 		
 

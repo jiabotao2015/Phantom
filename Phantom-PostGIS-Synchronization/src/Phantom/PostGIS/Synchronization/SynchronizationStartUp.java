@@ -1,7 +1,7 @@
 package Phantom.PostGIS.Synchronization;
 
 import java.sql.SQLException;
-import java.util.List;
+/*import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -16,7 +16,7 @@ import Phantom.PostGIS.Synchronization.Entity.GCJRoad;
 import Phantom.PostGIS.Synchronization.Entity.OSMRoad;
 import Phantom.PostGIS.Synchronization.Service.GCJRoadService;
 import Phantom.PostGIS.Synchronization.Service.OSMRoadService;
-
+*/
 public class SynchronizationStartUp {
 
 

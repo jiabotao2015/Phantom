@@ -1,5 +1,6 @@
 package Phantom.TerminalAccess;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,7 +10,6 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 public class PDFCreater {
 
@@ -32,9 +32,10 @@ public class PDFCreater {
 				contents.showText("哈哈");
 				contents.endText();
 			}
+			ByteArrayOutputStream output=new ByteArrayOutputStream();
 
-			doc.save("ads.pdf");
-
+			doc.save(output);
+			
 		}
 	}
 }

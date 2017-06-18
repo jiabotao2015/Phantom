@@ -32,10 +32,10 @@ public class OSMRoadService {
 		return roadDao.findOne(gid);
 	}
 	
-	public void getCoords(OSMRoad osmroad){
+	public Coordinate[] getCoords(OSMRoad osmroad){
 		Geometry geom = osmroad.getGeom();
 		Coordinate[] coords = geom.getCoordinates();
-		
+		return coords;
 	}
 
 }

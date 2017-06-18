@@ -1,13 +1,17 @@
 package Phantom.Web.Controller.GisController;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OpenLayerController {
 	
+	private static Logger logger = Logger.getLogger(OpenLayerController.class);
+	
 	@RequestMapping(value = "/MainMap")
 	public String MainMapUrl(){
+		logger.info("MainMap");
 		return "GIS/MainMap";
 	}
 	

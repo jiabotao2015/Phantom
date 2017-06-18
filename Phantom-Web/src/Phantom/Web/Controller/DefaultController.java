@@ -17,11 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-//import com.vividsolutions.jts.geom.Coordinate;
-//import com.vividsolutions.jts.geom.Geometry;
 
-//import Phantom.Web.Gis.Entity.CityPoint;
-//import Phantom.Web.Gis.Entity.CityPoint;
+import Phantom.Web.Gis.Entity.CityPoint;
+
 import Phantom.Web.Gis.Service.CityPintService;
 import Phantom.Web.Model.User;
 import Phantom.Web.Service.SystemManage.UserService;
@@ -61,12 +59,13 @@ public class DefaultController {
 		
 		HttpSession session = request.getSession();
 		User loginuser = userService.Login(Email, password);
+		userService.saveUser(loginuser);
 		if(loginuser!=null){
 			session.setAttribute("user", loginuser);
-			/*CityPoint cp = pointService.getCity(9);
-			Geometry geom = cp.getShape();
-		    Coordinate coord = geom.getCoordinate();
-			System.out.println(cp.getCityName());*/
+			CityPoint cp = pointService.getCity(9);		   
+			System.out.println(cp.getCityName());
+			cp.setCityName("wuhan");
+			pointService.addcity(cp);
 			return new ModelAndView("redirect:MainPage");
 		}
 		pointService.toString();

@@ -45,7 +45,6 @@ public class RoadSynTask {
 			PGNotification notifications[] = pgconn.getNotifications();
 			if (notifications != null) {
 				for (int i=0; i<notifications.length; i++) {
-					
 					System.out.println("Got notification: " + notifications[i].getName()+notifications[i].getParameter());
 				}
 			}
