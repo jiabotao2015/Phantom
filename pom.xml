@@ -38,6 +38,7 @@
 		<module>Phantom-Web</module>
 		<module>Phantom-AlarmCompute</module>
 		<module>Phantom-PostGIS-Synchronization</module>
+		<module>Phantom-Test-Web</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
