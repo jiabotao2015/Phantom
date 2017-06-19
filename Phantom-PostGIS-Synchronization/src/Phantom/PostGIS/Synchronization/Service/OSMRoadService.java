@@ -37,5 +37,7 @@ public class OSMRoadService {
 		Coordinate[] coords = geom.getCoordinates();
 		return coords;
 	}
+	
+	
 
 }

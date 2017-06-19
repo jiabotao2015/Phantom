@@ -10,7 +10,7 @@ import Phantom.PostGIS.Synchronization.Entity.OSMRoad;
 
 public class ConvertUtil {
 	
-	public Geometry OSMToDCJ(OSMRoad osmroad){
+	public static Geometry OSMToDCJ(OSMRoad osmroad){
 		Geometry geom = osmroad.getGeom();
 		Coordinate[] coords = geom.getCoordinates();
 		int coords_length = coords.length;
@@ -26,7 +26,7 @@ public class ConvertUtil {
 		return gcjgeom;
 	}
 	
-	public Geometry getLineStringWKT(Coordinate[] coords){
+	public static Geometry getLineStringWKT(Coordinate[] coords){
 		int coords_length = coords.length;
 		String wkt = "LINESTRING(";
 		for(int i=0;i<coords_length;i++){
