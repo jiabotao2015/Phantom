@@ -15,13 +15,13 @@
 	<!--指明 controller 所在包，并扫描其中的注解 -->
 	<context:component-scan base-package="Phantom.Web.Controller" />
 
-	<mvc:resources mapping="/jQuery/**" location="/Resources/jQuery/" />
-	<mvc:resources mapping="/OpenLayers/**" location="/Resources/OpenLayers/" />
-	<mvc:resources mapping="/BootStrap/**" location="/Resources/BootStrap/" />
-	<mvc:resources mapping="/Icons/**" location="/Resources/Icons/" />
-	<mvc:resources mapping="/AppJS/**" location="/AppJS/" />
-	<mvc:resources mapping="/AppCSS/**" location="/AppCSS/" />
-	<mvc:resources mapping="/Resources/**" location="/Resources/" />
+	<mvc:resources mapping="/jQuery/**" location="/Phantom/Resources/jQuery/" />
+	<mvc:resources mapping="/OpenLayers/**" location="/Phantom/Resource/OpenLayers/" />
+	<mvc:resources mapping="/BootStrap/**" location="/Phantom/Resource/BootStrap/" />
+	<mvc:resources mapping="/Icons/**" location="/Phantom/Resource/Icons/" />
+	<mvc:resources mapping="/AppJS/**" location="/Phantom/AppJS/" />
+	<mvc:resources mapping="/AppCSS/**" location="/Phantom/AppCSS/" />
+	<mvc:resources mapping="/Resources/**" location="/Phantom/Resource/" />
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven>
