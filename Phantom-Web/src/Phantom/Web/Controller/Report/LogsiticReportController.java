@@ -73,7 +73,7 @@ public class LogsiticReportController {
 	}
 
 	public ByteArrayInputStream parse(ByteArrayOutputStream pdfoutput) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		ByteArrayOutputStream   baos=new   ByteArrayOutputStream();
         baos=(ByteArrayOutputStream) pdfoutput;
         ByteArrayInputStream swapStream = new ByteArrayInputStream(baos.toByteArray());

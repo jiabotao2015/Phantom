@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHandler;
@@ -14,6 +15,8 @@ import org.springframework.web.socket.WebSocketSession;
 import Phantom.Web.Model.User;
 
 public class DemoWebSocketHandler implements WebSocketHandler{
+	
+	private static Logger logger = Logger.getLogger(DemoWebSocketHandler.class);
 	
 	private static ConcurrentHashMap<User,WebSocketSession> user_session_map = new ConcurrentHashMap<User,WebSocketSession>();
 
@@ -28,7 +31,7 @@ public class DemoWebSocketHandler implements WebSocketHandler{
 
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		// TODO Auto-generated method stub
+		// 收到消息后的处理
 		TextMessage returnMessage = new TextMessage(message.getPayload()  
                 + " received at server");  
         System.out.println(session.getHandshakeHeaders().getFirst("Cookie"));  
@@ -38,20 +41,20 @@ public class DemoWebSocketHandler implements WebSocketHandler{
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		System.out.println("websocket connection closed......");  
 		
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		 System.out.println("websocket connection closed......");  
 	}
 
 	@Override
 	public boolean supportsPartialMessages() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		return false;
 	}
 	
@@ -63,7 +66,7 @@ public class DemoWebSocketHandler implements WebSocketHandler{
 			try {
 				session.sendMessage(returnMessage);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				logger.error("发送websocket消息失败："+e.getMessage());
 				e.printStackTrace();
 			}
 		}

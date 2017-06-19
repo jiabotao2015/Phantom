@@ -21,7 +21,7 @@ public class SynchronizationStartUp {
 
 
 	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 	/*	ApplicationContext context = new FileSystemXmlApplicationContext("src/config/SpringContext.xml");
 		OSMRoadService roadservice = (OSMRoadService) context.getBean("RoadService");
 		GCJRoadService new_road_service = (GCJRoadService)context.getBean("GCJRoadService");

@@ -24,7 +24,7 @@ public class StringUtil {
 	 * @return
 	 */
 	public static ByteArrayInputStream parse(ByteArrayOutputStream output) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		/*ByteArrayOutputStream   baos=new   ByteArrayOutputStream();
         baos=(ByteArrayOutputStream) out;
         ByteArrayInputStream swapStream = new ByteArrayInputStream(baos.toByteArray());

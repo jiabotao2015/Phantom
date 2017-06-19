@@ -52,13 +52,13 @@ public class RoadSynTask {
 			int all = osmservice.getCount();
 			System.out.println(all);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			//  Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void initListener() {
-		// TODO Auto-generated method stub
+		//  初始化监听器，监听 mymessage 通道
 		Connection conn;
 		try {
 			conn = pgpds.getConnection();
@@ -67,7 +67,7 @@ public class RoadSynTask {
 			statement.close();
 			this.pgconn = (PGConnection) conn;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 

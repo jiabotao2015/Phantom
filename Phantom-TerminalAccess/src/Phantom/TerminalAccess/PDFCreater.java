@@ -14,7 +14,7 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 public class PDFCreater {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		try (PDDocument doc = new PDDocument()) {
 			PDPage page = new PDPage(PDRectangle.A6);
 			doc.addPage(page);
