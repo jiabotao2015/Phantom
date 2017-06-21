@@ -1,8 +1,8 @@
-package Phantom.Web.Service;
+package Phantom.Web.Service.GisService;
 
 import javax.persistence.EntityManagerFactory;
 
-public class BaseJpaSearch {
+public class BaseGisJPASearch {
 	
 	private EntityManagerFactory emf;
 

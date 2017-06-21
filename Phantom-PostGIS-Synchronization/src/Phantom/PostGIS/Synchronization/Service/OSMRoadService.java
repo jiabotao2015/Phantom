@@ -1,5 +1,6 @@
 package Phantom.PostGIS.Synchronization.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -36,6 +37,11 @@ public class OSMRoadService {
 		Geometry geom = osmroad.getGeom();
 		Coordinate[] coords = geom.getCoordinates();
 		return coords;
+	}
+	
+	public ArrayList<OSMRoad> findByPage(int limit,int offset){
+		ArrayList<OSMRoad> osm_road_array = roadDao.getOSMRoadByPage(limit, offset);
+		return osm_road_array;		
 	}
 	
 	

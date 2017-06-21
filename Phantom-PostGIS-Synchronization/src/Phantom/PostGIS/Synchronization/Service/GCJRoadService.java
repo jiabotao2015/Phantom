@@ -1,5 +1,7 @@
 package Phantom.PostGIS.Synchronization.Service;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,10 @@ public class GCJRoadService {
 	
 	public void save(GCJRoad entity){
 		roadDao.save(entity);
+	}
+	
+	public void save(ArrayList<GCJRoad> entities){
+		roadDao.save(entities);
 	}
 	
 	/*public int getCount(){

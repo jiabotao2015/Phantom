@@ -1,4 +1,4 @@
-package Phantom.Web.Service;
+package Phantom.Web.Service.RelationService;
 
 import javax.persistence.EntityManagerFactory;
 
