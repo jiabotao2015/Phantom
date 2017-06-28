@@ -2,7 +2,8 @@
  * 
  */
 $(document).ready(function() {
-	var ws = new WebSocket("ws://localhost:8080/Phantom-Web/websocket");
+	//var ws = new WebSocket("ws://localhost:8080/Phantom-Web/websocket");
+	var ws = new SockJS("http://localhost:8080/Phantom-Web/websocket");
 
 	ws.onmessage = function(event) {
 		console.log(event);

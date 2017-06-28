@@ -49,5 +49,15 @@
 	<jpa:repositories base-package="Phantom.Web.Dao"
 		entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="transactionManager" />
+		
+	<bean id="websocket" class="Phantom.Web.WebSocket.DemoWebSocketHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping path="websocket" handler="websocket" />
+		<websocket:handshake-interceptors>
+			<bean class="Phantom.Web.WebSocket.HandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
 	
 </beans>
