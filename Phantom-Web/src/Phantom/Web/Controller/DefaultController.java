@@ -62,10 +62,10 @@ public class DefaultController {
 		userService.saveUser(loginuser);
 		if(loginuser!=null){
 			session.setAttribute("user", loginuser);
-			CityPoint cp = pointService.getCity(9);		   
-			System.out.println(cp.getCityName());
-			cp.setCityName("wuhan");
-			pointService.addcity(cp);
+			//CityPoint cp = pointService.getCity(9);		   
+			//System.out.println(cp.getCityName());
+			//cp.setCityName("wuhan");
+			//pointService.addcity(cp);
 			return new ModelAndView("redirect:MainPage");
 		}
 		pointService.toString();

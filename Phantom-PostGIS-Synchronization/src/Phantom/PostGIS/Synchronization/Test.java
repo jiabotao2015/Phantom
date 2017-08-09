@@ -79,6 +79,7 @@ public class Test {
 			gcj_road.setOsmid(osmroad.getOsmid());
 			gcj_road.setCode(osmroad.getCode());
 			gcj_road.setFclass(osmroad.getFclass());
+			gcj_road.setLayer(osmroad.getLayer());
 			
 			String name = osmroad.getName();
 			if(name!=null){
@@ -96,6 +97,7 @@ public class Test {
 			gcj_road.setTunnel(osmroad.getTunnel());
 			gcj_road.setGeom(gcjgeom);
 			gcj_road_array.add(gcj_road);
+			
 		}
 		//GCJRoadService
 		return gcj_road_array;

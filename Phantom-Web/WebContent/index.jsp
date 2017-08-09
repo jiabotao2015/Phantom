@@ -11,7 +11,7 @@
 <script src="BootStrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<button type="button" class="btn btn-default">（默认样式）Default</button>
+	<button id="addUser" type="button" class="btn btn-default">（默认样式）Default</button>
 	<button type="button" class="btn btn-primary">（首选项）Primary</button>
 	<button type="button" class="btn btn-success">（成功）Success</button>
 	<button type="button" class="btn btn-info">（一般信息）Info</button>
@@ -19,4 +19,33 @@
 	<a class="btn btn-success" href="Login" type="button" >Login</a>
 	<a class="btn btn-primary" href="VehicleMonitor/Map" type="button" >Map</a>
 </body>
+<script>
+
+	$("#addUser").click(function() {
+		$.ajax({
+			type : "POST",
+			url : "http://192.168.3.202:9090/plugins/restapi/v1/users",
+			data : {
+			    "username": "jiabotao",
+			    "password": "jiabotao"
+			},
+			dataType : "text",
+			success : function(data) {
+				console.log(data);
+			}
+		});
+	});
+
+	$.ajax({
+		type : "GET",
+		url : "./FeatureController/getPolygonArea",
+		data : {
+			wkt : featurewkt2
+		},
+		dataType : "text",
+		success : function(data) {
+			console.log(data);
+		}
+	});
+</script>
 </html>

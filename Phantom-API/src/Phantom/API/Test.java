@@ -1,5 +1,8 @@
 package Phantom.API;
 
+import Phantom.API.Bean.LonLat;
+import Phantom.API.Util.LngLatUtil;
+
 /*import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -11,13 +14,13 @@ public class Test {
 
 	public static void main(String[] args) {
 		 
-		//LonLat coord = new LonLat();
-		//LngLatUtil.transform(30.2528126, 120.1731103, coord);
+		LonLat coord = new LonLat();
+		LngLatUtil.transform(31.129993, 121.4714, coord);
 		//LngLatUtil.Wgs84ToBd09(120.1773595, 120.1773595, coord);
-		//double a = coord.getLatitude();
-		//double b = coord.getLongitude();
-		//System.out.println(a);
-		//System.out.println(b);
+		double a = coord.getLatitude();
+		double b = coord.getLongitude();
+		System.out.println(a);
+		System.out.println(b);
 		
 		
 		
@@ -50,10 +53,10 @@ public class Test {
 		System.out.println(wkt);
 		System.out.println(new_wkt);*/
 		
-		String a = null;
+		/*String a = null;
 		if(a ==null){
 			System.out.println("1");
-		}
+		}*/
 		// Exception
 		/*if(a.equals(null)){
 			System.out.println("0");

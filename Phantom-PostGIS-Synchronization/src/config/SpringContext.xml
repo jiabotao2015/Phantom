@@ -14,7 +14,7 @@
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
+		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -29,7 +29,7 @@
 	<!-- <context:component-scan base-package="Phantom.PostGIS.Synchronization">
 
 	</context:component-scan> -->
-	<!-- <bean
+	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="locations">
@@ -100,7 +100,7 @@
 
 	<jpa:repositories base-package="Phantom.PostGIS.Synchronization.Dao"
 		entity-manager-factory-ref="GisEntityManagerFactory"
-		transaction-manager-ref="GisTransactionManager" /> -->
+		transaction-manager-ref="GisTransactionManager" />
 		
 		
 	<bean id="roadTask" class="Phantom.PostGIS.Synchronization.SynTask.RoadSynTask">

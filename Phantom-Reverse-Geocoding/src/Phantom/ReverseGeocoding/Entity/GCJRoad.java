@@ -1,4 +1,4 @@
-package Phantom.PostGIS.Synchronization.Entity;
+package Phantom.ReverseGeocoding.Entity;
 
 import java.io.Serializable;
 

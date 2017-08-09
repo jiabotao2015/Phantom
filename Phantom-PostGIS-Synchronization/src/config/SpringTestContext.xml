@@ -17,7 +17,7 @@
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
+		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>

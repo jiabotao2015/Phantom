@@ -39,6 +39,7 @@
 		<module>Phantom-AlarmCompute</module>
 		<module>Phantom-PostGIS-Synchronization</module>
 		<module>Phantom-Test-Web</module>
+		<module>Phantom-Reverse-Geocoding</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

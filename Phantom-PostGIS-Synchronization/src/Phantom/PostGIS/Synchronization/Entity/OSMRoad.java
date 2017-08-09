@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.vividsolutions.jts.geom.Geometry;
 
 @Entity
-@Table(name = "tb_osm_roads_line")
+@Table(name = "tb_osm_road")
 public class OSMRoad implements Serializable {
 
 	private static final long serialVersionUID = -8100878780552809265L;

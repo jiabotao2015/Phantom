@@ -29,5 +29,10 @@ public class OpenLayerController {
 	public String GoogleMapUrl(){
 		return "GIS/OpenLayersWithGoogleMap";
 	}
+	
+	@RequestMapping(value = "/MapBox")
+	public String MapBoxUrl(){
+		return "GIS/OpenLayersWithMapBox";
+	}
 
 }
