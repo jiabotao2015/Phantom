@@ -37,6 +37,39 @@ public class SpatialUtil {
 		Point point = geometryFactory.createPoint(coord);
 		return point;
 	}
+	
+	/**
+	 * 点到直线的距离 （ 最近点）
+	 * @param line
+	 * @param point
+	 * @return
+	 */
+	public static double getDistance(Geometry line,Geometry point){
+		double dis= point.distance(line);
+		return dis;
+	}
+	
+	
+	/**
+	 * 判断点是否在面上
+	 * @param polygon
+	 * @param point
+	 * @return
+	 */
+	public static boolean isIn(Geometry polygon,Geometry point){
+		boolean isin= polygon.contains(point);
+		return isin;
+	}
+	
+	/*public static void get_any_else(Geometry geomA,Geometry geomB){
+		boolean a = geomA.covers(geomB);//A覆盖B
+		a = geomA.disjoint(geomB);//判断不想交
+		a = geomA.touches(geomB);//毗邻
+		geomA.setSRID(4326);//设置坐标系
+		geomA.getArea();//计算面积
+		geomA.getCoordinates();//获取geom所有点//有序的
+		geomA.buffer(distance)//给点或者面加buffer返回面要素
+	}*/
 
 	/**
 	 * Well-Know-Text 字符串创建geom对象，任何geom对象

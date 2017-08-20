@@ -1,11 +1,11 @@
-package Phantom.ReverseGeocoding.Utils;
-
+package Phantom.Web.Utils;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -32,9 +32,10 @@ public class HttpUtils {
 	 *            请求参数
 	 * @return URL 所代表远程资源的响应结果
 	 */
-	public static String sendGet(String url, HashMap<String, String> params) {
+	public static InputStream sendGet(String url, HashMap<String, String> params) {
 		String result = "";
 		BufferedReader in = null;
+		InputStream is =null;
 		try {
 			/** 组装参数 **/
 		//	String param = parseParams(params);
@@ -48,19 +49,20 @@ public class HttpUtils {
 			connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			/** 建立实际的连接 **/
 			connection.connect();
+			is = connection.getInputStream();
 			/** 定义 BufferedReader输入流来读取URL的响应 **/
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-			BufferedImage image = ImageIO.read(connection.getInputStream());  
+			//in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+			//BufferedImage image = ImageIO.read(connection.getInputStream());  
 			//Image big = image.getScaledInstance(256, 256,Image.SCALE_DEFAULT);
-			BufferedImage inputbig = new BufferedImage(256, 256,BufferedImage.TYPE_INT_BGR);
-	        inputbig.getGraphics().drawImage(image, 0, 0, 256, 256, null); //画图
-	       // String name = x+"-"+y+"-"+z+ ".png";
-	      //  ImageIO.write(inputbig, "png", new File("D:/MapBox/"+name)); 
+			//BufferedImage inputbig = new BufferedImage(256, 256,BufferedImage.TYPE_INT_BGR);
+	        //inputbig.getGraphics().drawImage(image, 0, 0, 256, 256, null); //画图
+	        //String name = x+"-"+y+"-"+z+ ".png";
+	        //ImageIO.write(inputbig, "png", new File("D:/MapBox/"+name)); 
 			
-			String line;
-			while ((line = in.readLine()) != null) {
-				result += line;
-			}
+			//String line;
+			//while ((line = in.readLine()) != null) {
+			//	result += line;
+			//}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {/** 使用finally块来关闭输入流 **/
@@ -72,7 +74,7 @@ public class HttpUtils {
 				e2.printStackTrace();
 			}
 		}
-		return result;
+		return is;
 	}
 
 	/**

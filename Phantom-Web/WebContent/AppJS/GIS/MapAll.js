@@ -176,6 +176,25 @@ var MapApi = {
 		});
 
 	},
+	
+	'initLocalMap':function(){
+		var map = new ol.Map(
+				{
+					layers : [ new ol.layer.Tile(
+							{
+								source : new ol.source.XYZ(
+										{
+											url : './MapController/LocalMap?z={z}&x={x}&y={y}'
+										})
+							}) ],
+					target : 'map',
+					view : new ol.View({
+						projection : 'EPSG:4326',
+						center : [ 114, 30 ],
+						zoom : 5
+					})
+				});
+	},
 
 	'initMapBox' : function() {
 		var map = new ol.Map(
@@ -185,6 +204,25 @@ var MapApi = {
 								source : new ol.source.XYZ(
 										{
 											url : 'https://api.mapbox.com/styles/v1/jiabotao/cj5w2f5hn70ru2srvllh6bnzs/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamlhYm90YW8iLCJhIjoiY2o1d2F3czZtMDkzZjJ3cGhobmJwdndvaCJ9.b0FIlPNKysOUrchduYcYow'
+										})
+							}) ],
+					target : 'map',
+					view : new ol.View({
+						projection : 'EPSG:4326',
+						center : [ 114, 30 ],
+						zoom : 5
+					})
+				});
+	},
+	
+	'initLocalGaodeMap':function(){
+		var map = new ol.Map(
+				{
+					layers : [ new ol.layer.Tile(
+							{
+								source : new ol.source.XYZ(
+										{
+											url : './MapController/LocalGaodeMap?z={z}&x={x}&y={y}'
 										})
 							}) ],
 					target : 'map',

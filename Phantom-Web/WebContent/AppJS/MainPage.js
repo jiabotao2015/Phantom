@@ -2,7 +2,8 @@
  * 
  */
 $(document).ready(function() {
-	MapApi.init();
+	
+	MapApi.initLocalGaodeMap();
 	
 	console.log("init center and zoom");
 	$("#btn_get_beijng").click(function() {

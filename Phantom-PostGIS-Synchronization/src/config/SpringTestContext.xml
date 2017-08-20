@@ -17,7 +17,7 @@
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -57,6 +57,14 @@
 
 	<bean name="GCJRoadService"
 		class="Phantom.PostGIS.Synchronization.Service.GCJRoadService">
+	</bean>
+	
+	<bean name="MapTileService"
+		class="Phantom.PostGIS.Synchronization.Service.MapTileService">
+	</bean>
+	
+	<bean name="GaodeMapTileService"
+		class="Phantom.PostGIS.Synchronization.Service.GaodeMapTileService">
 	</bean>
 
 
