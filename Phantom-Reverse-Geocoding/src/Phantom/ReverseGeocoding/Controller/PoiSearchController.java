@@ -37,10 +37,10 @@ public class PoiSearchController {
 			poiCode = poiCodes[k];
 			int page = 1;
 			int offset = 20;
-			String url = "http://restapi.amap.com/v3/place/text?key="+key+"&types="+poiCode+"&city="+cityCode+"&offset=20"+"&page="+page;
+			//String url = "http://restapi.amap.com/v3/place/text?key="+key+"&types="+poiCode+"&city="+cityCode+"&offset=20"+"&page="+page;
 			int totlePage = 2;
 			for(page=1;page<totlePage;page++){
-				url = "http://restapi.amap.com/v3/place/text?key="+key+"&types="+poiCode+"&city="+cityCode+"&offset=20"+"&page="+page;
+				String url = "http://restapi.amap.com/v3/place/text?key="+key+"&types="+poiCode+"&city="+cityCode+"&offset=20"+"&page="+page;
 				String result = HttpUtils.sendGet(url, null);
 				String pages = result.substring(result.indexOf("count")+8, result.indexOf("info")-3);
 				

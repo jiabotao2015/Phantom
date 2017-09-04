@@ -40,6 +40,7 @@
 		<module>Phantom-PostGIS-Synchronization</module>
 		<module>Phantom-Test-Web</module>
 		<module>Phantom-Reverse-Geocoding</module>
+		<module>Phantom-Data-Initiation</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

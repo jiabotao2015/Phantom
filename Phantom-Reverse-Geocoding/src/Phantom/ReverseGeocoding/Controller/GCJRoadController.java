@@ -13,74 +13,36 @@ import com.vividsolutions.jts.geom.Geometry;
 
 import Phantom.ReverseGeocoding.Entity.GCJRoad;
 import Phantom.ReverseGeocoding.Service.GCJRoadService;
-import Phantom.ReverseGeocoding.Service.GeoService;
-import Phantom.ReverseGeocoding.Service.ReverseGeocodingService;
 import Phantom.ReverseGeocoding.Utils.HttpUtils;
 
 @Controller
 public class GCJRoadController {
 
 	@Autowired
-	private ReverseGeocodingService service;
-
-	@Autowired
-	private GeoService geoservice;
-
-	@Autowired
 	private GCJRoadService gcjroadService;
 	
-	private static int p = 5;
+	private static int p = 5;//key请求量用完以后，换新的key时可用此记录不发生重复请求
 
-	@RequestMapping(value = "/updateRoad", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-	public @ResponseBody String getUnNamedGCJRoad() {
-		for (int k = 1; k < 400; k++) {
-			ArrayList<GCJRoad> temproads = gcjroadService.getUnNamedGCJRoad(2000, 2000 * k);
-
-			for (int i = 0; i < temproads.size(); i++) {
-				GCJRoad temp_road = temproads.get(i);
-				Geometry geom = temp_road.getGeom();
-				Coordinate[] coords = geom.getCoordinates();
-				int coordsize = coords.length;
-				for (int j = 0; j < coordsize; j++) {
-					Coordinate coord = coords[j];
-					double lon = coord.x;
-					double lat = coord.y;
-					String url = "http://gc.ditu.aliyun.com/regeocoding?l=" + lat + "," + lon + "&type=100";
-					url = "http://restapi.amap.com/v3/geocode/regeo?key=8f514706623f68d8595ccbde6115fd9b&location="
-							+ lon + "," + lat;
-					// url =
-					// "http://apis.map.qq.com/ws/geocoder/v1/?location="+lat+","+lon+"&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&get_poi=0";
-					String result = HttpUtils.sendGet(url, null);
-					System.out.println(result);
-					result = result.substring(result.indexOf("street"), result.indexOf("number") - 2);
-					String[] namearr = result.split(":");
-					String name = namearr[2];
-					if (name.length() > 2) {
-						name = name.substring(1, name.length() - 1);
-						System.out.println(name);
-						temp_road.setName(name);
-						System.out.println(temp_road.getGid());
-						gcjroadService.save(temp_road);
-						System.out.println("K:" + k);
-						j = coordsize + 1;
-					}
-				}
-			}
-		}
-		return "OK";
-	}
 	
+	/**
+	 * 1取数据库中的道路
+	 * 2在道路上取点，取道路上中间的点作为请求的经纬度（去线段头尾）
+	 * 3调用高德api 获取http响应 解析字符串，保存有用的字段
+	 * @param key
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value="/UpdateRoadFromGaode",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
 	public @ResponseBody String UpdateRoadFromGaode(String key,String page){
 		//p=p-1;
 		for (int k =p; k < 150; k++) {
 		p = p+1;
 		System.out.println(k);
-			ArrayList<GCJRoad> temproads = gcjroadService.getUnNamedGCJRoad(2000, 2000 * k);
+			ArrayList<GCJRoad> temproads = gcjroadService.getUnNamedGCJRoad(2000, 2000 * k);//分页查询道路
 			for (int i = 0; i < temproads.size(); i++) {
 				GCJRoad temp_road = temproads.get(i);
 				Geometry geom = temp_road.getGeom();
-				Coordinate[] coords = geom.getCoordinates();
+				Coordinate[] coords = geom.getCoordinates();//取道路上的点
 				//System.out.println(temp_road.getGid());
 				int coordsize = coords.length;
 				Coordinate coord = new Coordinate();
@@ -108,14 +70,14 @@ public class GCJRoadController {
 					double lat = coord.y;
 					String url = "http://restapi.amap.com/v3/geocode/regeo?"+"key="+key+"&location="
 							+ lon + "," + lat;
-					String oresult = HttpUtils.sendGet(url, null);
+					String oresult = HttpUtils.sendGet(url, null);//请求高德api获取result
 					System.out.println("gid:"+temp_road.getGid());
 					System.out.println("经纬度："+lon+","+lat);
 					System.out.println("result"+oresult);
 					String result = oresult.substring(oresult.indexOf("formatted_address"), oresult.indexOf("addressComponent") - 2);
 					String[] namearr = result.split(":");
 					String address = namearr[1];
-					if (address.length() > 2) {
+					if (address.length() > 2) {//如果adress的长度大于2，认为请求正常，开始解析道路地址
 						if(address.contains("县道")){
 				        	address = address.substring(address.indexOf("县道")-3);
 				        	address = address.replaceAll("\"", "");
@@ -272,18 +234,6 @@ public class GCJRoadController {
 		//}
 		return "OK";
 	}
-	
-	@RequestMapping(value="/modifyRoad",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-	public @ResponseBody String modifyRoad(){
-		ArrayList<GCJRoad> temproads = gcjroadService.getGaoSuGCJRoad();
-		for(int i = 0 ;i<temproads.size();i++){
-			GCJRoad temp_road = temproads.get(i);
-			String name = temp_road.getName();
-			name = name.substring(0, name.length()-2);
-			temp_road.setName(name);
-			gcjroadService.save(temp_road);
-		}
-		return "OK";
-	}
+
 
 }

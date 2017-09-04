@@ -129,11 +129,11 @@ var MapApi = {
 
 	'initGMap' : function() {
 		center = ol.proj.transform([ -74.04455, 40.6893 ], 'EPSG:4326',
-				'EPSG:900913');
+				'EPSG:3857');
 
 		var GoogleSource = new ol.source.OSM(
 				{
-					url : 'http://mt{0-3}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+					url : 'http://a.map.icttic.cn:81/engine?st=GetImage&box={x},{y}&lev={z}&type=vect&uid=ycig',
 					attributions : [
 							new ol.Attribution({
 								html : '© Google'
@@ -222,10 +222,12 @@ var MapApi = {
 							{
 								source : new ol.source.XYZ(
 										{
-											url : './MapController/LocalGaodeMap?z={z}&x={x}&y={y}'
+											url : './MapController/LocalGaodeTile?z={z}&x={x}&y={y}'
 										})
 							}) ],
 					target : 'map',
+					loadTilesWhileAnimating:'true',
+					loadTilesWhileInteracting:'true',
 					view : new ol.View({
 						projection : 'EPSG:4326',
 						center : [ 114, 30 ],
@@ -320,6 +322,51 @@ var MapApi = {
 			request.send(featString);
 		})
 	},
+	'drawLine':function(){
+		map.removeInteraction(draw);
+		
+		map.getInteractions().forEach(function(inter){
+			if(inter instanceof ol.interaction.DoubleClickZoom){
+				map.removeInteraction(inter);
+			}
+		},this);
+		
+		
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+		var vector = new ol.layer.Vector({
+			source : source
+		});
+		// var draw; // global so we can remove it later
+		draw = new ol.interaction.Draw({
+			source : source,
+			type : "LineString"
+		});
+		draw.set("name", "draw", true);
+		map.addLayer(vector);
+		map.addInteraction(draw);
+		
+		
+		//console.log(allInteractions);
+		
+		draw.on('drawend', function(evt) {
+			var feature = evt.feature;
+			var wktwriter = new ol.format.WKT();
+			var opentions = {
+					dataProjection : 'EPSG:4326',
+					featureProjection : 'EPSG:3857',
+					rightHanded : true,
+					decimals : 6
+				};
+			var featurewkt = wktwriter.writeFeature(feature,opentions);
+			map.removeInteraction(draw);
+			console.log(featurewkt);
+			
+		})
+		
+		
+	},
 	'drawPolygon' : function(layer) {
 		var b = map.getInteractions();
 		// /map.removeInteraction(draw);
@@ -374,6 +421,13 @@ var MapApi = {
 			type : "Circle"
 		});
 		map.addInteraction(draw);
+		
+		draw.on('drawend', function(evt) {
+			var feature = evt.feature;
+			var wktwriter = new ol.format.WKT();
+			var featurewkt = wktwriter.writeFeature(feature);
+			console.log(featurewkt);
+		})
 	},
 	'viewTrack' : function(points) {
 		// 第一步把点变成mutiline,在line层展现
@@ -527,10 +581,13 @@ var MapApi = {
 	'stopDraw' : function() {
 		map.removeInteraction(draw);
 		// Unlisten for a certain type of event.
-		map.un('pointermove', pointerMoveHandler);
+		/*map.un('pointermove', pointerMoveHandler);
 		measureTooltipElement = null;
 		helpTooltipElement = null;
-		map.removeOverlay(helpTooltip);
+		map.removeOverlay(helpTooltip);*/
+		var stopzoomInteraction = new ol.interaction.DoubleClickZoom();
+		stopzoomInteraction.setActive(true);
+		map.addInteraction(stopzoomInteraction);
 	},
 	'flyToLocation' : function(Lng, lat) {
 		var view = map.getView();

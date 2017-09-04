@@ -19,23 +19,21 @@ public class GaodeMapTileUpdateStartUp {
 		String contextPath = "src/config/SpringTestContext.xml";
 		
 		
-		int z=16;//16
-		int minX = 44800;//44800
-		int maxX = 57600;//57600
-		int minY = 21600;//21600
-		int maxY = 30400;//30400
+		int z=17;//17
+		int minX = 89720;// 89600   89657
+		int maxX = 115200;//115200
+		int minY = 43200;//21600 43200
+		int maxY = 60800;//30400 60800
 		
 		
 		for(int tasknum=0;tasknum<80;tasknum++){
 			ApplicationContext context = new FileSystemXmlApplicationContext(contextPath);
 			GaodeMapTileService mapTileService = (GaodeMapTileService) context.getBean("GaodeMapTileService");
-			GaodeMapTileSnyTask task = new GaodeMapTileSnyTask(minX, minX+160, minY, maxY, z, mapTileService);
+			String processName = "线程："+tasknum;
+			GaodeMapTileSnyTask task = new GaodeMapTileSnyTask(minX, minX+320, minY, maxY, z, mapTileService,processName);
 			task.start();
-			minX = minX+160;
+			minX = minX+320;
 		}
-		
-		
-		
 		
 
 	}

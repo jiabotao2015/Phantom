@@ -13,15 +13,16 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="Phantom.PostGIS.Synchronization"></context:component-scan>
-	
+
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
+		<property name="jdbcUrl"
+			value="jdbc:postgresql://192.168.3.151:5432/PhantomGIS" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
-	
+
 	<bean id="GisEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="GisDataSource" />
@@ -44,13 +45,13 @@
 	<bean id="GisTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="GisEntityManagerFactory" />
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="GISTransactionManager" />
 
 	<jpa:repositories base-package="Phantom.PostGIS.Synchronization.Dao"
 		entity-manager-factory-ref="GisEntityManagerFactory"
 		transaction-manager-ref="GisTransactionManager" />
-		
+
 	<bean name="OSMRoadService"
 		class="Phantom.PostGIS.Synchronization.Service.OSMRoadService">
 	</bean>
@@ -58,15 +59,22 @@
 	<bean name="GCJRoadService"
 		class="Phantom.PostGIS.Synchronization.Service.GCJRoadService">
 	</bean>
-	
+
 	<bean name="MapTileService"
 		class="Phantom.PostGIS.Synchronization.Service.MapTileService">
 	</bean>
-	
+
 	<bean name="GaodeMapTileService"
 		class="Phantom.PostGIS.Synchronization.Service.GaodeMapTileService">
 	</bean>
 
+	<bean name="ProvinceService"
+		class="Phantom.PostGIS.Synchronization.Service.ProvinceService">
+	</bean>
+
+	<bean name="AdministrativeDivisionService"
+		class="Phantom.PostGIS.Synchronization.Service.AdministrativeDivisionService">
+	</bean>
 
 	<bean id="PGConnectionPoolDataSource" class="org.postgresql.ds.PGConnectionPoolDataSource">
 		<property name="serverName" value="localhost" />
@@ -76,33 +84,16 @@
 		<property name="password" value="postgres" />
 	</bean>
 
-	<!-- <bean id="SpringQtzJob" class="Phantom.PostGIS.Synchronization.SynTask.RoadSynTask">
-		<property name="pgpds" ref="PGConnectionPoolDataSource"/>
-	</bean>
-	<bean id="SpringQtzJobMethod"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject">
-			<ref bean="SpringQtzJob" />
-		</property>
-		<property name="targetMethod">  要执行的方法名称
-			<value>execute</value>
-		</property>
-	</bean>
-	
-
-	======================== 调度触发器 ========================
-	<bean id="CronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="SpringQtzJobMethod"></property>
-		<property name="cronExpression" value="0 0/1 * * * ?"></property>
-	</bean>
-
-	======================== 调度工厂 ========================
-	<bean id="SpringJobSchedulerFactoryBean"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<ref bean="CronTriggerBean" />
-			</list>
-		</property>
-	</bean> -->
+	<!-- <bean id="SpringQtzJob" class="Phantom.PostGIS.Synchronization.SynTask.RoadSynTask"> 
+		<property name="pgpds" ref="PGConnectionPoolDataSource"/> </bean> <bean id="SpringQtzJobMethod" 
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject"> <ref bean="SpringQtzJob" /> </property> <property 
+		name="targetMethod"> 要执行的方法名称 <value>execute</value> </property> </bean> 
+		======================== 调度触发器 ======================== <bean id="CronTriggerBean" 
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> <property 
+		name="jobDetail" ref="SpringQtzJobMethod"></property> <property name="cronExpression" 
+		value="0 0/1 * * * ?"></property> </bean> ======================== 调度工厂 ======================== 
+		<bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> 
+		<property name="triggers"> <list> <ref bean="CronTriggerBean" /> </list> 
+		</property> </bean> -->
 </beans>

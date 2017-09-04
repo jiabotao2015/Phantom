@@ -3,13 +3,17 @@
  */
 $(document).ready(function() {
 	
-	MapApi.initLocalGaodeMap();
+	MapApi.initGMap();
 	
 	console.log("init center and zoom");
 	$("#btn_get_beijng").click(function() {
-		MapApi.CenterAndZoom(116.397428, 39.90923, 11);
+		MapApi.CenterAndZoom(119.242702, 39.677665, 15);
 		
 	});
+	$("#btn_draw_line").click(function() {
+		MapApi.drawLine();
+	});
+	
 	$("#btn_show_point").click(function() {
 		//MapApi.addLayer(citypoint_vector_layer);
 		var donghu_vector_layer = new ol.layer.Vector({
@@ -43,9 +47,9 @@ $(document).ready(function() {
 	$("#btn_draw_polygon").click(function() {
 		MapApi.drawPolygon(citypoint_vector_layer);
 	});
-	$("#btn_draw_line").click(function() {
+	/*$("#btn_draw_line").click(function() {
 		MapApi.drawCircle(citypoint_vector_layer);
-	});
+	});*/
 	$("#btn_get_lenght").click(function() {
 		MapApi.startMeasureLine();
 	});

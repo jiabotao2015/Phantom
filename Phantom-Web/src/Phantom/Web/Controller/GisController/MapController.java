@@ -15,6 +15,7 @@ import java.util.Base64;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import Phantom.Web.Gis.Entity.GaodeMapTile;
 import Phantom.Web.Gis.Entity.MapTile;
 import Phantom.Web.Gis.Service.GaodeMapTileService;
+import Phantom.Web.Gis.Service.GisService;
 import Phantom.Web.Gis.Service.MapTileService;
 import Phantom.Web.Utils.HttpUtils;
 
@@ -37,6 +39,9 @@ public class MapController {
 	
 	@Autowired
 	private GaodeMapTileService amapTileService;
+	
+	@Autowired
+	private GisService gisService;
 
 	@ResponseBody
 	@RequestMapping(value = "/LocalMap", method = RequestMethod.GET, produces = "image/png;charset=UTF-8")
@@ -84,6 +89,11 @@ public class MapController {
 				
 		GaodeMapTile entity = amapTileService.getTileByTileCodeId(code);
 		
+		DataSource fs = gisService.getDataSource();
+		if(fs!=null){
+			System.out.println("木有问题");
+		}
+		
 		/*GaodeMapTile en = amapTileService.getTileByXYZ(Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(z));
 		if(en!=null){
 			System.out.println("木有问题");
@@ -94,6 +104,11 @@ public class MapController {
 		if (entity != null) {
 			System.out.println(x+"-"+y+"-"+z+"查询时间："+findtime);
 			byte[] img = entity.getTile();
+			long startgisfind = System.currentTimeMillis();
+			img = gisService.getTile(code);
+			long endgisfind = System.currentTimeMillis();
+			findtime = endgisfind - startgisfind;
+			System.out.println(x+"-"+y+"-"+z+"GISDS查询时间："+findtime);
 			//InputStream is = ByteToInputStream(img);
 			OutputStream stream = response.getOutputStream();
 			stream.write(img);
@@ -120,6 +135,33 @@ public class MapController {
 				System.out.println(x+"-"+y+"+"+z+"insert");
 			}
 			
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/LocalGaodeTile", method = RequestMethod.GET, produces = "image/png;charset=UTF-8")
+	public void getGaodeTile(String x, String y, String z, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String code = x+"-"+y+"-"+z;
+		long startgisfind = System.currentTimeMillis();
+		byte[] tile = gisService.getTile(code);
+		long endgisfind = System.currentTimeMillis();
+		long findtime = endgisfind - startgisfind;
+		System.out.println(x+"-"+y+"-"+z+"GISDS查询时间："+findtime);
+		OutputStream stream = response.getOutputStream();
+		if(tile!=null){
+			stream.write(tile);
+			stream.flush();
+			stream.close();
+		}else{
+			String url = "http://webst02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x="+x+"&y="+y+"&z="+z;
+			InputStream inStream = HttpUtils.sendGet(url, null);
+			if(inStream!=null){
+				byte[] new_tile = InputStreamToByte(inStream);
+				stream.write(new_tile);
+				stream.flush();
+				stream.close();
+			}
 		}
 		
 	}

@@ -20,16 +20,19 @@ public class GaodeMapTileSnyTask extends Thread {
 	private int maxY;
 
 	private int level;
+	
+	private String processName;
 
 	private GaodeMapTileService service;
 
-	public GaodeMapTileSnyTask(int minX, int maxX, int minY, int maxY, int level, GaodeMapTileService service) {
+	public GaodeMapTileSnyTask(int minX, int maxX, int minY, int maxY, int level, GaodeMapTileService service,String processName) {
 		this.minX = minX;
 		this.maxX = maxX;
 		this.minY = minY;
 		this.maxY = maxY;
 		this.level = level;
 		this.service = service;
+		this.processName = processName;
 	}
 
 	public int getMinX() {
@@ -94,7 +97,7 @@ public class GaodeMapTileSnyTask extends Thread {
 				String code = x+"-"+y+"-"+level;
 				GaodeMapTile entity = service.getTileByCodeId(code);
 				if (entity == null) {
-					System.out.println(code);
+					System.out.println(code+"----"+processName);
 					entity = new GaodeMapTile();
 					String url = "http://webst01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x=" + x
 							+ "&y=" + y + "&z=" + level;
@@ -121,6 +124,7 @@ public class GaodeMapTileSnyTask extends Thread {
 			}
 		}
 		service.save(tiles);
+		System.out.println(processName+"----结束");
 	}
 
 	private static final byte[] InputStreamToByte(InputStream inStream) throws IOException {
@@ -132,6 +136,14 @@ public class GaodeMapTileSnyTask extends Thread {
 		}
 		byte[] in2b = swapStream.toByteArray();
 		return in2b;
+	}
+
+	public String getProcessName() {
+		return processName;
+	}
+
+	public void setProcessName(String processName) {
+		this.processName = processName;
 	}
 
 }
