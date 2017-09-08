@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import Phantom.ReverseGeocoding.Service.GeoService;
 import Phantom.ReverseGeocoding.Service.ReverseGeocodingService;
-import Phantom.ReverseGeocoding.Utils.HttpUtils;
 
 @Controller
 public class ReverseController {
@@ -26,40 +25,45 @@ public class ReverseController {
 	@Autowired
 	private GeoService geoservice;
 	
-	//@RequestMapping("/test")
-	@RequestMapping(value="/test",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-	public @ResponseBody String test(String lon,String lat) throws Exception{
-		String result  = service.reserve(lon, lat);
-		return result;
-	}
-	
-	@RequestMapping(value="/getWKT",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-	public @ResponseBody String getWKT() throws SQLException{
 		
-		String url = "http://localhost:8080/Phantom-Reverse-Geocoding/test?lon=121.451370&lat=29.842689";
-		String result = HttpUtils.sendGet(url, null);
-		//String wkt = geoservice.getWKT();
-		System.out.println(result);
-		
-		return "";
-		
-	}
-	
-	@RequestMapping(value="/getsynData",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-	public @ResponseBody String synbussnispoint() throws SQLException{
-		geoservice.getzyywd();
-		return "";
-	}
-	
 	@RequestMapping(value="/ReverseEncoding",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
 	public @ResponseBody String ReverseEncoding(String lon,String lat) throws Exception{
 		long start = System.currentTimeMillis();
-		String result  = service.reserve(lon, lat);
+		//String result  = service.reserve(lon, lat);
+		String result  = service.reserveWithPool(lon, lat);
+		double a = 114;
+		double b = 30;
+		for(int i=0;i<2000;i++){
+			b = b + 0.0001;
+			result  = service.reserveWithPool(a+"", b+"");
+			System.out.println(result);
+		}
 		long end = System.currentTimeMillis();
 		long diff = end - start;
 		System.out.println("Difference is : " + diff);
 		return result;
 	}
+	
+	@RequestMapping(value="/ReverseEncodingWithHibernate",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
+	public @ResponseBody String ReverseEncodingWithHibernate(String lon,String lat) throws Exception{
+		long start = System.currentTimeMillis();
+		String result  = service.reserve(lon, lat);
+		//String result  = service.reserveWithPool(lon, lat);
+		
+		
+		double a = 114;
+		double b = 30;
+		for(int i=0;i<2000;i++){
+			b = b + 0.0001;
+			result  = service.reserve(a+"", b+"");
+		}
+		long end = System.currentTimeMillis();
+		long diff = end - start;
+		System.out.println("Difference is : " + diff);
+		return result;
+	}
+	
+	
 	
 	
 	

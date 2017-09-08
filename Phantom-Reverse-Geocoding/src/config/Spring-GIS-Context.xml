@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -13,7 +12,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 	  http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 	  http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
-	  http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	  ">
 
 	<context:component-scan base-package="Phantom.ReverseGeocoding">
 
@@ -32,7 +31,7 @@
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
 		<!-- <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" /> -->
-		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
+		<property name="jdbcUrl" value="jdbc:postgresql://59.172.105.85:5432/tiispgis" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -68,7 +67,7 @@
 	
 	
 	<bean id="GeoService" class="Phantom.ReverseGeocoding.Service.GeoService">
-		<property name="dataSource" ref="GisDataSource"></property>  
+		<property name="dataSourcePool" ref="GisDataSource"></property>  
 	</bean>
 
 	<tx:annotation-driven transaction-manager="GISTransactionManager" />
@@ -76,21 +75,6 @@
 		entity-manager-factory-ref="GisEntityManagerFactory"
 		transaction-manager-ref="GisTransactionManager" />
 		
-	<import resource="classpath:config/cxf.xml" />
-	<import resource="classpath:config/cxf-servlet.xml" />
-	<bean id="ReverseEncodingService" class="Phantom.ReverseGeocoding.WebService.ReverseEncodingService"></bean>
 	
-	<jaxws:server address="/ReverseEncoding" serviceClass="Phantom.ReverseGeocoding.WebService.IReverseEncodingService">
-        <jaxws:serviceBean>
-            <ref bean="ReverseEncodingService"/>
-        </jaxws:serviceBean>
-        <!-- 配置输入显示日志信息的拦截器   -->
-        <jaxws:inInterceptors>
-            <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
-        </jaxws:inInterceptors>
-        <jaxws:outInterceptors>
-            <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
-        </jaxws:outInterceptors>
-    </jaxws:server>
 
 </beans>
