@@ -28,5 +28,11 @@ public class AdministrativeDivisionService {
 		ArrayList<String> adcodes = adDao.getAllAdCode();
 		return adcodes;
 	}
+	
+	public ArrayList<String>  getadcodenotin() {
+		// TODO Auto-generated method stub
+		ArrayList<String> adcodes = adDao.getadcodenotin();
+		return adcodes;
+	}
 
 }

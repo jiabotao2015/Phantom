@@ -53,8 +53,7 @@ var wgs84Sphere = new ol.Sphere(6378137);
 var MapApi = {
 
 	'init' : function() {
-		center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326',
-				'EPSG:3857');
+		center = ol.proj.transform([ 114.433909, 30.498707 ], 'EPSG:4326','EPSG:3857');
 		var origin = [ -20037508.3427892, 20037508.3427892 ];
 		var extent = [ -20037508.3427892, -20037508.3427892, 20037508.3427892,
 				20037508.3427892 ];

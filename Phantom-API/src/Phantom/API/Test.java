@@ -14,14 +14,12 @@ public class Test {
 
 	public static void main(String[] args) {
 		 
-		LonLat coord = new LonLat();
-		LngLatUtil.transform(31.129993, 121.4714, coord);
-		//LngLatUtil.Wgs84ToBd09(120.1773595, 120.1773595, coord);
-		double a = coord.getLatitude();
-		double b = coord.getLongitude();
-		System.out.println(a);
-		System.out.println(b);
-		
+		String a = "1,2,3:4,5,6:7,8,9";
+		String[] b = a.split(":");
+		System.out.println(b[1]);
+		String  c = b[1];
+		String[] d = c.split(",");
+		System.out.println(d[1]);
 		
 		
 		

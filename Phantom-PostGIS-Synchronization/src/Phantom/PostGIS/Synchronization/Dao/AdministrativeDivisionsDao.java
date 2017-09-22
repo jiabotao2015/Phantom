@@ -11,5 +11,8 @@ public interface AdministrativeDivisionsDao extends BaseRepository<Administrativ
 	
 	@Query(value="SELECT adcode.adcode FROM adcode",nativeQuery=true)
 	public ArrayList<String> getAllAdCode();
+	
+	@Query(value="SELECT adcode FROM adcode WHERE adcode.adcode NOT IN (SELECT adcode FROM tb_gcj_administrative_divisions)",nativeQuery=true)
+	public ArrayList<String> getadcodenotin();
 
 }

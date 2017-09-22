@@ -31,7 +31,8 @@
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
 		<!-- <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" /> -->
-		<property name="jdbcUrl" value="jdbc:postgresql://59.172.105.85:5432/tiispgis" />
+		<!-- <property name="jdbcUrl" value="jdbc:postgresql://59.172.105.85:5432/tiispgis" /> -->
+		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -60,10 +61,7 @@
 		<property name="entityManagerFactory" ref="GisEntityManagerFactory" />
 	</bean>
 
-	<bean id="baseJpaSearch" class="Phantom.ReverseGeocoding.Service.BaseJpaSearch">
-		<property name="factory" ref="GisEntityManagerFactory"></property>
-		<property name="dataSource" ref="GisDataSource"></property> 
-	</bean>
+
 	
 	
 	<bean id="GeoService" class="Phantom.ReverseGeocoding.Service.GeoService">

@@ -11,9 +11,57 @@
 	  http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 	  http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
+	<!-- 自动扫描注解，指定注解类所在的包名 -->
+	<context:component-scan base-package="Phantom.Data.Initiation" > 
+        
+    </context:component-scan>
+     
+    <bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:postgresql://192.168.3.151:5432/PhantomGIS" />
+		<property name="user" value="postgres" />
+		<property name="password" value="postgres" />
+	</bean>
+
+	<!-- 此处需要配置扫描的Entity包名 -->
+	<bean id="GisEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="GisDataSource" />
+		<property name="jpaVendorAdapter" ref="GisHibernateJpaVendorAdapter" />
+		<property name="packagesToScan" value="Phantom.Data.Initiation.Entity" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+			</props>
+		</property>
+	</bean>
+	<bean id="GisHibernateJpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform"
+			value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
+	</bean>
+
+	<bean id="GisTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="GisEntityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="GISTransactionManager" />
+
+	<!-- 此处需要配置扫描的Dao包名 -->
+	<jpa:repositories base-package="Phantom.Data.Initiation.Dao"
+		entity-manager-factory-ref="GisEntityManagerFactory"
+		transaction-manager-ref="GisTransactionManager" />
 
 
 	<bean id="ExampleJob" class="Phantom.Data.Initiation.Task.SimpleTask" />
+	
+	<bean id="AutoJob" class="Phantom.Data.Initiation.Task.StartExampleTask"></bean>
+	
+	
 	<bean id="ExampleJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">

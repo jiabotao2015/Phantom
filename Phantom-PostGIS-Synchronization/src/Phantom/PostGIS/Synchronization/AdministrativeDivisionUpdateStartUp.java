@@ -21,7 +21,7 @@ public class AdministrativeDivisionUpdateStartUp {
 		ApplicationContext context = new FileSystemXmlApplicationContext(contextPath);
 		AdministrativeDivisionService adservice = (AdministrativeDivisionService)context.getBean("AdministrativeDivisionService");
 		
-		ArrayList<String>  adcodes = adservice.getAllAdCode();
+		ArrayList<String>  adcodes = adservice.getadcodenotin();
 		for(int i = 0;i<adcodes.size();i++){
 			String adcode = adcodes.get(i);
 			try{
@@ -39,9 +39,12 @@ public class AdministrativeDivisionUpdateStartUp {
 
 	private static AdministrativeDivision getAdministrativeDivision(String adcode) {
 		// TODO Auto-generated method stub
-		String url = "http://restapi.amap.com/v3/config/district?subdistrict=1&showbiz=false&extensions=all&key=1b0e5166d02fbd3961027fb68c4c8de0&s=rsv3&output=json&level=province&"
+		String url = "http://restapi.amap.com/v3/config/district?subdistrict=0&showbiz=false&extensions=all&key=1b0e5166d02fbd3961027fb68c4c8de0&s=rsv3&output=json&level=province&"
 				+ "keywords="+adcode
 				+ "&callback=jsonp_11464_&platform=JS&logversion=2.0&sdkversion=1.3&appname=http%3A%2F%2Flocalhost%3A8080%2FPhantom-Web%2Findex.jsp&csid=A1CE8095-519E-4951-8927-638A9FD3159D";
+		
+		
+		url = "http://restapi.amap.com/v3/config/district?key=aa347f1ab38e8d46d81d76b499fa976c&keywords="+adcode+"&subdistrict=0&extensions=all";
 		
 		String all = HttpUtils.sendGetString(url);
 		System.out.println(all);

@@ -53,9 +53,8 @@
 		</div>
 	</div>
 </body>
-
-<script src="./AppJS/GIS/MapAll.js"></script>
-<script src="./AppJS/GIS/PointFeatureLayer.js"></script>
+<script src="./AppJS/GIS/OpenLayerMapAPI.js"></script>
+<!-- <script src="./AppJS/GIS/PointFeatureLayer.js"></script> -->
 <script src="./AppJS/MainPage.js"></script>
-<script src="./AppJS/websocket.js"></script>
+<!-- <script src="./AppJS/websocket.js"></script> -->
 </html>
