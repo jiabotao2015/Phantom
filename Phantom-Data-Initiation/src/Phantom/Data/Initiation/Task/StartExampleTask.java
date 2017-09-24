@@ -13,11 +13,12 @@ public class StartExampleTask implements InitializingBean{
 	@Autowired
 	private OSMRoadService service;
 	
+	private static final int pagesize = 1000;
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		long a = service.count();
-		System.out.println(a);
+		long count = service.count();
 		
 	}
 

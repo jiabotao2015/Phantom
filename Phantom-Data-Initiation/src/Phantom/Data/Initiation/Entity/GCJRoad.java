@@ -12,10 +12,10 @@ import javax.persistence.Table;
 import com.vividsolutions.jts.geom.Geometry;
 
 @Entity
-@Table(name = "tb_osm_road")
-public class OSMRoad implements Serializable {
+@Table(name = "tb_gcj_road")
+public class GCJRoad implements Serializable {
 
-	private static final long serialVersionUID = -8100878780552809265L;
+	private static final long serialVersionUID = -5799294121581405953L;
 
 	private int gid;
 
@@ -40,6 +40,10 @@ public class OSMRoad implements Serializable {
 	private String tunnel;
 
 	private Geometry geom;
+	
+	private double flength;
+	
+	private double tlenght;
 	
 	@Id
 	@Column(name = "gid")
@@ -151,9 +155,27 @@ public class OSMRoad implements Serializable {
 		this.geom = geom;
 	}
 
+	@Column(name = "flength")
+	public double getFlength() {
+		return flength;
+	}
+
+	public void setFlength(double flength) {
+		this.flength = flength;
+	}
+
+	@Column(name = "tlength")
+	public double getTlenght() {
+		return tlenght;
+	}
+
+	public void setTlenght(double tlenght) {
+		this.tlenght = tlenght;
+	}
+
 	@Override
 	public String toString() {
-		return "OSMRoad [gid=" + gid + ", osmid=" + osmid + ", code=" + code + ", fclass=" + fclass + ", name=" + name
+		return "GCJRoad [gid=" + gid + ", osmid=" + osmid + ", code=" + code + ", fclass=" + fclass + ", name=" + name
 				+ ", ref=" + ref + ", oneway=" + oneway + ", maxspeed=" + maxspeed + ", layer=" + layer + ", bridge="
 				+ bridge + ", tunnel=" + tunnel + ", geom=" + geom + "]";
 	}

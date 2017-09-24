@@ -35,7 +35,8 @@
 			<props>
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
 				<prop key="hibernate.show_sql">false</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
 			</props>
 		</property>
 	</bean>
@@ -60,6 +61,11 @@
 	<bean id="ExampleJob" class="Phantom.Data.Initiation.Task.SimpleTask" />
 	
 	<bean id="AutoJob" class="Phantom.Data.Initiation.Task.StartExampleTask"></bean>
+	
+	<!-- 
+	<bean id="OSMRoadToGCJRoadTask" class="Phantom.Data.Initiation.Task.OSMRoadToGCJRoadTask"></bean>
+	 -->
+	
 	
 	
 	<bean id="ExampleJobDetail"
