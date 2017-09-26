@@ -1,18 +1,14 @@
 package Phantom.AlarmCompute;
 
-import java.util.Timer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-public class AlarmComputeStartUp {
-	
-	private static final long period = 40*1000;
-	
-	private static LogisticsCacheIniter tast = new LogisticsCacheIniter();
-	
-	private static Timer timer = new Timer(); //定时任务
+public class AlarmComputeStartup {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		timer.schedule(tast, 0, period);
+		String contextPath = "src/config/ApplicationContext.xml";
+		ApplicationContext context = new FileSystemXmlApplicationContext(contextPath);
 
 	}
 

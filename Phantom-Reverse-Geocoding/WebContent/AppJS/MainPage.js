@@ -163,5 +163,11 @@ $(document).ready(function() {
 		});
 	});
 	
+	
+	
+	$("#btn_CaculateExtent").click(function() {
+		MapAPI.StartListenViewChange();
+	});
+	
 
 });

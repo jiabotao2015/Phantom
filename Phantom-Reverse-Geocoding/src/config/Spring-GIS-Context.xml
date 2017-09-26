@@ -30,9 +30,9 @@
 	<bean id="GisDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<!-- <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" /> -->
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/PhantomGIS" />
 		<!-- <property name="jdbcUrl" value="jdbc:postgresql://59.172.105.85:5432/tiispgis" /> -->
-		<property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" />
+		<!-- <property name="jdbcUrl" value="jdbc:postgresql://192.168.3.199:5432/test" /> -->
 		<property name="user" value="postgres" />
 		<property name="password" value="postgres" />
 	</bean>
@@ -45,7 +45,7 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>

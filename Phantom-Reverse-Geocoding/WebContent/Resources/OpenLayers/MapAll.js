@@ -138,7 +138,7 @@ var MapAPI = {
 			maxZoom : 18,
 			zoom : zoom
 		});
-
+		
 		var mousePositionControl = new ol.control.MousePosition({
 			coordinateFormat : ol.coordinate.createStringXY(6),
 			projection : 'EPSG:4326',
@@ -179,6 +179,7 @@ var MapAPI = {
 			 * map.addInteraction(zoomInteraction); }
 			 */
 		});
+		
 	},
 
 	'ChangeMap' : function() {
@@ -340,9 +341,15 @@ var MapAPI = {
 		var view = map.getView();
 		var extent = view.calculateExtent(map.getSize());
 		var projection = view.getProjection();
-		var epsg4326Extent = ol.proj.transformExtent(extent, projection,
-				'EPSG:4326');
+		var epsg4326Extent = ol.proj.transformExtent(extent, projection,'EPSG:4326');
+		console.log(epsg4326Extent);
 		return epsg4326Extent;
+	},
+	
+	'StartListenViewChange':function(){
+		//var view = map.getView();
+		//view.on("change",MapAPI.CaculateExtent);
+		map.on("moveend",MapAPI.CaculateExtent);
 	},
 
 	'PushLineToMap' : function(GPSArray) {

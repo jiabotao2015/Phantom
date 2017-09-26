@@ -9,6 +9,7 @@
 <script src="jQuery/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="OpenLayers/ol.css" />
 <script src="OpenLayers/ol-debug.js"></script>
+<script src="OpenLayers/jsts.min.js"></script>
 <script src="OpenLayers/MapAll.js"></script>
 <link rel="stylesheet" type="text/css" href="AppCSS/MapAll.css" />
 </head>
@@ -30,6 +31,7 @@
 		<button id="btn_draw_line" type="button" class="btn btn-default">绘制折现</button>
 		<button id="btn_draw_point" type="button" class="btn btn-default">绘制GPS</button>
 		<button id="btn_gaode_regeocoding" type="button" class="btn btn-default">高德逆地址解析</button>
+		<button id="btn_CaculateExtent" type="button" class="btn btn-default">获取视野范围</button>
 		<button id="btn_maptool" type="button" class="btn">地图工具</button>
 	</div>
 	<!--<div id="container"></div>-->
